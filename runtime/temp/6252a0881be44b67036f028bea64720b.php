@@ -1,4 +1,61 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:61:"F:\blog2017\public/../application/index\view\index\index.html";i:1511189679;s:63:"F:\blog2017\public/../application/index\view\layout\layout.html";i:1511189121;s:63:"F:\blog2017\public/../application/index\view\public\header.html";i:1511181755;s:63:"F:\blog2017\public/../application/index\view\public\footer.html";i:1511179763;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo APP_NAME; ?></title>
+</head>
+<link rel="stylesheet"  href="<?php echo APP_PUBLIC; ?>layui/css/layui.css"/>
+<link rel="stylesheet"  href="<?php echo APP_PUBLIC; ?>static/css/bass.css"/>
+<link rel="stylesheet"  href="<?php echo APP_PUBLIC; ?>static/css/font-awesome.min.css"/>
+<script src="<?php echo APP_PUBLIC; ?>layui/layui.js"></script>
+<script src="<?php echo APP_PUBLIC; ?>static/js/layui_use.js"></script>
+<body class="padding-none margin-none layui-bg-gray">
 <style>
+.nav-bg{background-color: #393D49;}
+.nav{position: relative;}
+.nav-common{position: absolute; left: 15%;top:0;}
+.nav-logo{
+    width: auto;
+    text-align: center;
+    line-height: 64px;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    font-family:KaiTi;
+    display: inline-block;
+    z-index: 10;
+    margin:  0 auto;
+}
+.nav-common .layui-nav{width: 85%;}
+</style>
+<nav class="layui-header nav-bg layui-col-md12" style="position: fixed;top: 0px;">
+    <div class="nav nav-common layui-col-md10">
+        <a class="nav-logo" href="/">黑牛儿</a>
+        <ul class="nav-common layui-nav" lay-filter="nav">
+            <li class="layui-nav-item layui-this">
+                <a href="/"><i class="fa fa-home fa-fw"></i>首页</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">程序猿</a>
+                <dl class="layui-nav-child">
+                    <dd><a>技术</a></dd>
+                    <dd><a>工作</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">生活</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="">心情</a></dd>
+                    <dd><a href="">感想</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">关于</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="layui-container" style="width: 1400px;">
+    <style>
     .body-left{margin-top: 70px;float: left;}
     .body-right{margin-top: 70px;margin-left: 20px;float: left;}
     .index-article{
@@ -29,7 +86,7 @@
     <div class="layui-col-md7 body-left">
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -50,7 +107,7 @@
         </div>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -71,7 +128,7 @@
         </div>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -92,7 +149,7 @@
         </div>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -113,7 +170,7 @@
         </div>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -134,7 +191,7 @@
         </div>
         <div class="index-article shadow">
         <div class="article-left">
-            <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+            <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
         </div>
         <div class="article-right">
             <div class="article-title">
@@ -155,7 +212,7 @@
     </div>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -176,7 +233,7 @@
         </div>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img src="<?php echo APP_PUBLIC; ?>static/tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
             </div>
             <div class="article-right">
                 <div class="article-title">
@@ -200,3 +257,23 @@
 
     </div>
     <div style="clear:both;"></div>
+
+</div>
+<style>
+    .footer{text-align: center;border-top: 1px solid #009688;margin-top: 15px;background: #2F4056;padding: 5px 0;color: #d3d2d2;}
+    .footer > p {
+        margin: 2px 0;
+    }
+    .footer a {
+        color: #d2d2d2;
+    }
+    .footer > p a, .footer > p span {
+        padding-left: 7px;
+    }
+</style>
+<footer class="footer">
+    <p><span>Copyright</span><span>©</span><span>2017</span><a href="http://www.heiniuer.cn">黑牛儿</a><span>Design By ChenHaiLong</span></p>
+    <p><a href="http://www.miibeian.gov.cn/" target="_blank">蜀ICP备xxxxxx号-1</a></p>
+</footer>
+</body>
+</html>
