@@ -6,7 +6,7 @@ use app\admin\model\Menu;
 class Index
 {
     /**
-     * 首页
+     * 锟斤拷页
      * @return \think\response\View
      */
     public function index()
@@ -26,7 +26,7 @@ class Index
     }
 
     /**
-     * 获取头部菜单
+     * 鑾峰彇椤堕儴鑿滃崟
      * @return mixed
      */
     public function getTopMenuList(){
@@ -36,7 +36,7 @@ class Index
     }
 
     /**
-     * 获取子菜单
+     * 鑾峰彇宸︿晶鑿滃崟
      * @return mixed
      */
     public function getChildMenu()

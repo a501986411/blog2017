@@ -10,9 +10,9 @@ namespace app\admin\model;
 use think\Model;
 
 class Menu  extends Model {
-
+    protected $statusConf = [0=>'停用', 1=>'启用'];
     /**
-     * ��ȡ�Լ��˵�
+     * 获取顶部菜单
      * @return false|\PDOStatement|string|\think\Collection
      */
     public function getTopList()
@@ -25,7 +25,7 @@ class Menu  extends Model {
     }
 
     /**
-     * ��ȡ�Ӳ˵�id
+     * 获取子菜单
      * @param $pid
      */
     public function getChildMenuList($pid)
@@ -35,5 +35,26 @@ class Menu  extends Model {
         ->order('sort','asc')
         ->select();
         return $menu;
+    }
+
+    /**
+     * 获取菜单列表
+     */
+    public function getMenuList()
+    {
+        $list = $this->order('id','asc')->select();
+        foreach($list as &$v){
+            $v['status_text'] = $this->statusConf[$v['status']];
+        }
+        return $list;
+    }
+
+    /**
+     * 状态获取器
+     */
+    public function getStatusTextAttr($value,$data)
+    {
+         $statusConf = [0=>'停用', 1=>'启用'];
+         return $statusConf[$data['status']];
     }
 }
