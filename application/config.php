@@ -8,7 +8,10 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
+// admin子域名绑定到admin模块
+use think\Route;
+Route::domain('admin.blog.com','admin');
+Route::domain('local.blog.com','index');
 return [
     // +----------------------------------------------------------------------
     // | 应用设置
@@ -97,7 +100,7 @@ return [
     // 是否强制使用路由
     'url_route_must'         => false,
     // 域名部署
-    'url_domain_deploy'      => false,
+    'url_domain_deploy'      => true,
     // 域名根，如thinkphp.cn
     'url_domain_root'        => '',
     // 是否自动转换URL中的控制器和操作名

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>黑牛儿博客管理系统</title>
+    <link rel="stylesheet" href="<?php echo APP_PUBLIC;?>layui/css/layui.css">
+</head>
+<script src="{$Think.const.APP_PUBLIC}jquery-1.9.1.min.js"></script>
+<script src="{$Think.const.APP_PUBLIC}layui/layui.js"></script>
+<script src="{$Think.const.APP_PUBLIC}vue.js"></script>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div id="menu">
+        <div class="layui-header">
+            <div class="layui-logo">黑牛儿</div>
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item" v-for="item in topMenu"><a v-bind:href="item.url+'?id='+item.id">{{item.name}}</a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                        贤心
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">退了</a></li>
+            </ul>
+        </div>
+        <div class="layui-side layui-bg-black" v-if="isShow">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item" v-for="item in leftMenu"><a v-bind:href="item.url+'?id='+item.pid">{{item.name}}</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="layui-body" style="background-color: #eee;">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            {__CONTENT__}
+        </div>
+    </div>
+
+    <div class="layui-footer" style="left: 0;text-align: center;">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+<script>
+    var menu = new Vue({
+        el:"#menu",
+        data:{
+            isShow:false,
+            topMenu:[],
+            leftMenu:[]
+        },
+        created:function(){
+            this.changeLeftMenu();
+            this.topMenuList();
+        },
+        methods:{
+            changeLeftMenu:function(){
+                var _self = this;
+                //左侧菜单控制
+                if("{$Think.get.id}" == 3 || !"{$Think.get.id}"){
+                    _self.isShow=false;
+                }else{
+                    _self.isShow=true;
+                    $.get('/Index/getChildMenu?pid='+"{$Think.get.id}",function(result){
+                        _self.leftMenu = result.leftMenu;
+                    });
+                }
+            },
+            //顶部菜单控制
+            topMenuList:function(){
+                var _self = this;
+                $.get('/Index/getTopMenuList',function(result){
+                    _self.topMenu = result.topMenu;
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

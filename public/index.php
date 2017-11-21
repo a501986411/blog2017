@@ -13,7 +13,7 @@
 
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/../application/');
-define('APP_PUBLIC', './');
+define('APP_PUBLIC', '/static/');
 define('APP_NAME','黑牛儿的个人博客');
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
