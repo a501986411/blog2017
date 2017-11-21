@@ -24,7 +24,19 @@
     .index-article > .article-footer > span {
         padding-right: 3%;
     }
+
     .index-article > .article-footer > .article-viewinfo{float: right;display: inline-block;}
+    .body-right > .name-card {background-color: white;text-align: center;padding: 0 15px;margin-bottom: 15px;}
+    .body-right > .name-card > .name-card-logo {display: inline-block;margin: 20px auto;}
+    .name-card-logo > img{border-radius: 50px;}
+    .name-card-name {font-size: 32px;font-weight: bold;margin: 0 0 15px 0;}
+    .name-card-address {color: #808080;margin: 15px;font-size: 13px;}
+    .name-card-link{padding: 15px;padding-top: 5px;}
+    .name-card-link > a {margin: 10px;}
+    .right-block {background-color: white;padding: 0 15px;margin-bottom:15px;}
+    .right-block > .title {border-bottom: 1px solid #009688;font-size: 15px;padding: 0 0 5px 0;margin-bottom: 5px;}
+    .right-block > ul > li {line-height: 23px;margin: 3px 0;}
+
 </style>
     <div class="layui-col-md7 body-left">
         <div class="index-article shadow">
@@ -196,7 +208,55 @@
             </div>
         </div>
     </div>
-    <div class="layui-col-md4 body-right" style="background-color: yellow;height: 100px;">
-
+    <div class="layui-col-md4 body-right">
+        <div class="name-card shadow">
+            <div class="name-card-logo">
+                <img src="{$Think.const.APP_PUBLIC}static/tmpImg/Absolutely.jpg" alt="黑牛儿"/>
+            </div>
+            <p class="name-card-name">黑牛儿</P>
+            <P style="font-size: 18px;width: 90%;margin: 15px auto;">一名安安静静敲代码的PHP程序员</P>
+            <P class="name-card-address"><i class="fa fa-location-arrow"></i>四川-成都</P>
+            <hr>
+            <div class="name-card-link">
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=501986411&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:501986411:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+                <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNfc0drc1d3Y29rTh4aM9MXFmtfb2Q" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_11.png"/></a>
+            </div>
+        </div>
+        <div class="right-block shadow">
+            <div class="title">热文推荐</div>
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP面向对象</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP字符函数处理</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP文件处理方法</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP高精度运算</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>JS实现异步请求</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>MySql之索引优化</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>Linux环境兑换</a></li>
+            </ul>
+        </div>
+        <div class="right-block shadow">
+            <div class="title">站长推荐</div>
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP面向对象</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP字符函数处理</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP文件处理方法</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP高精度运算</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>JS实现异步请求</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>MySql之索引优化</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>Linux环境兑换</a></li>
+            </ul>
+        </div>
+        <div class="right-block shadow">
+            <div class="title">友情链接</div>
+            <ul class="fa-ul">
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP面向对象</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP字符函数处理</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP文件处理方法</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP高精度运算</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>JS实现异步请求</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>MySql之索引优化</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a>Linux环境兑换</a></li>
+            </ul>
+        </div>
     </div>
     <div style="clear:both;"></div>
