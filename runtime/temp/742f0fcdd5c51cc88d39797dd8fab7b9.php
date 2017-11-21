@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:69:"E:\project\blog2017\public/../application/index\view\index\index.html";i:1511163027;s:71:"E:\project\blog2017\public/../application/index\view\layout\layout.html";i:1511169857;s:71:"E:\project\blog2017\public/../application/index\view\public\header.html";i:1511168955;s:71:"E:\project\blog2017\public/../application/index\view\public\footer.html";i:1511162980;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:69:"E:\project\blog2017\public/../application/index\view\index\index.html";i:1511163027;s:71:"E:\project\blog2017\public/../application/index\view\layout\layout.html";i:1511171949;s:71:"E:\project\blog2017\public/../application/index\view\public\header.html";i:1511168955;s:71:"E:\project\blog2017\public/../application/index\view\public\footer.html";i:1511162980;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@
 <script src="<?php echo APP_PUBLIC; ?>layui/layui.js"></script>
 <script src="<?php echo APP_PUBLIC; ?>static/js/layui_use.js"></script>
 <body class="padding-none margin-none layui-bg-gray">
-<style>
+    <style>
 .nav-bg{background-color: #393D49;border-bottom: 1px solid rgb(95, 184, 120);}
 .nav{position: relative;}
 .nav-common{position: absolute; left: 15%;top:0;}
@@ -53,8 +53,8 @@
         </ul>
     </div>
 </nav>
-dfsdfsdfsd
-<div>
+    dfsdfsdfsd
+    <div>
     this is footer
 </div>
 </body>
