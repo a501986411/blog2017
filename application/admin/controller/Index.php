@@ -20,11 +20,6 @@ class Index
     }
 
 
-    public function menuMange()
-    {
-        return view();
-    }
-
     /**
      * 获取顶部菜单
      * @return mixed

@@ -1,0 +1,129 @@
+<div id="content">
+    <div v-show="!editPage">
+        <button class="layui-btn" id="add_menu" v-on:click="addArticle()"><i class="layui-icon">&#xe608;</i>添加</button>
+        <table id="menu_tb" class="layui-table" lay-size="md">
+            <thead >
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>URL</th>
+                <th>状态</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item,index) in articleList">
+                <td>{{++index}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.url}}</td>
+                <td>{{item.status_text}}</td>
+                <td>{{item.sort}}</td>
+                <td>
+                    <button class="layui-btn-sm layui-btn layui-btn-danger">
+                        停用
+                    </button>
+                    <button class="layui-btn-sm layui-btn">
+                        编辑
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div v-show="editPage">
+        <form class="layui-form layui-form-pane " id="article_fm">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">描述信息:</label>
+                <div class="layui-input-block">
+                    <textarea name="description" placeholder="请输入文章简要描述信息" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">标签:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="tag" required  lay-verify="required" placeholder="请输入文章标签,多个用“;”分割" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">作者:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="author" required  lay-verify="required"  autocomplete="off" class="layui-input" value="黑牛儿">
+                </div>
+            </div>
+            <div id="test-editormd">
+                <textarea name="content"  style="display:none;"></textarea>
+            </div>
+        </form>
+        <div class="layui-form-item" style="text-align: center;">
+            <div class="layui-input-block">
+                <button class="layui-btn" @click="saveArticle()">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary" @click="cancel()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{$Think.const.APP_PUBLIC}Editor.md/js/editormd.min.js"></script>
+<script>
+    var content = new Vue({
+        el:"#content",
+        data:{
+            articleList:[],
+            editPage:true,
+        },
+        methods:{
+            addArticle:function(){
+                this.editPage = true;
+                $("#article_fm")[0].reset();
+            },
+            cancel:function(){
+                this.editPage = false;
+                $("#article_fm")[0].reset();
+            },
+            saveArticle:function(){
+                var _self = this;
+                $("#article_fm").formSubmit({
+                    url:"{:url('ArticleManage/save')}",
+                    success:function(result){
+                        if(result){
+                            _self.cancel();
+                            layer.msg('操作成功');
+                        }else{
+                            layer.msg('操作失败');
+                        }
+                    },
+                });
+            }
+        }
+    });
+    $(function() {
+        editormd("test-editormd", {
+            width: "100%",
+            height: 800,
+            path : '{$Think.const.APP_PUBLIC}Editor.md/lib/',
+            markdown : '',
+            codeFold : true,
+            saveHTMLToTextarea : true,
+            searchReplace : true,
+            htmlDecode : "style,script,iframe|on*",
+            emoji : true,
+            taskList : true,
+            tocm            : true,         // Using [TOCM]
+            tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart : true,             // 开启流程图支持，默认关闭
+            sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/ArticleManage/upload",
+            onload : function() {}
+        });
+});
+
+</script>
+

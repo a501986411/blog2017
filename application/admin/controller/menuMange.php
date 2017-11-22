@@ -8,8 +8,20 @@
 namespace app\admin\controller;
 
 use app\admin\model\Menu;
+use think\Controller;
 
-class MenuMange {
+class MenuMange extends Controller{
+
+    /**
+     * 菜单管理页面
+     * @return \think\response\View
+     */
+    public function menuMange()
+    {
+        $model = new Menu();
+        $topMenuList = $model->getTopList();
+        return view('',['topMenuList'=>$topMenuList]);
+    }
 
     /**
      * 获取菜单列表
@@ -20,5 +32,19 @@ class MenuMange {
         $model = new Menu();
         $list = $model->getMenuList();
         return $list;
+    }
+
+    /**
+     * 保存菜单数据
+     */
+    public function save()
+    {
+        $model = new Menu(input());
+        $ret = $model->allowField(true)->save();
+        if($ret){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

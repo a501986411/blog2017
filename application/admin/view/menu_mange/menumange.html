@@ -1,0 +1,130 @@
+<div id="content">
+<div v-show="!editPage">
+    <button class="layui-btn" id="add_menu" v-on:click="addMenu()"><i class="layui-icon">&#xe608;</i>添加</button>
+    <table id="menu_tb" class="layui-table" lay-size="md">
+        <thead >
+        <tr>
+            <th>序号</th>
+            <th>名称</th>
+            <th>URL</th>
+            <th>状态</th>
+            <th>排序</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) in menuList">
+            <td>{{++index}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.url}}</td>
+            <td>{{item.status_text}}</td>
+            <td>{{item.sort}}</td>
+            <td>
+                <button class="layui-btn-sm layui-btn layui-btn-danger">
+                    停用
+                </button>
+                <button class="layui-btn-sm layui-btn">
+                    编辑
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div v-show="editPage">
+    <form class="layui-form layui-form-pane " id="menu_fm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">URL:</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" required  lay-verify="required" placeholder="输入URL" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级菜单</label>
+            <div class="layui-input-block">
+                <select name="pid" lay-verify="required" id="pid">
+                    <option value="0">无</option>
+                    <?php foreach($topMenuList as $v):?>
+                    <option value="{$v['id']}">{$v['sort']}--{$v['name']}</option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="启用" checked>
+                <input type="radio" name="status" value="0" title="停用" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序权重:</label>
+            <div class="layui-input-block">
+                <input type="text" name="sort" required  lay-verify="required" placeholder="输入排序权重" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </form>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn"  @click="saveMenu()">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary" @click="cancel()">取消</button>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    var content = new Vue({
+        el:"#content",
+        data:{
+            menuList:[],
+            editPage:false,
+        },
+        created:function() {
+            this.getMenuList();
+            this.getTopMenuList();
+        },
+        methods:{
+            getMenuList:function(){
+                var _self = this;
+                $.get('/MenuMange/getMenuList',function(result){
+                    _self.menuList = result;
+                });
+            },
+            addMenu:function(){
+                $("#menu_fm")[0].reset();
+                this.editPage = true;
+            },
+            getTopMenuList:function(){
+                var _self = this;
+                $.get('/Index/getTopMenuList',function(result){
+                    _self.topMenuList = result.topMenu;
+                });
+            },
+            saveMenu:function(){
+                var _self = this;
+                $("#menu_fm").formSubmit({
+                    url:"{:url('/MenuMange/save')}",
+                    success:function(result){
+                        if(result){
+                            _self.getMenuList();
+                            _self.cancel();
+                            layer.msg('保存成功')
+                        } else {
+                            layer.msg('保存失败')
+                        }
+                    }
+                });
+            },
+            cancel:function(){
+                $("#menu_fm")[0].reset();
+                this.editPage=false;
+            },
+        }
+    });
+</script>
