@@ -23,8 +23,9 @@ class Article extends Model {
         });
     }
 
+
     /**
-     * ���������б���ʾͼƬ
+     * 设置文章列表显示图片
      * @return string
      */
     protected function setIndexImgAttr()
@@ -42,20 +43,53 @@ class Article extends Model {
     }
 
     /**
-     * �������±�ǩ
+     * 保存文章标签
      * @return bool
      */
     protected function saveTags()
     {
+
         if($this->tag){
-            $tag = explode("|",$this->tag);
-            $tagModel = new ArticleTag();
-            foreach($tag as $t){
-               if(!$tagModel->saveTag(trim($t))){
-                   return false;
-               }
+            $newTag = explode("|",$this->tag); //新的标签数组
+            $oldTag = []; //就文章标签数组
+            if($this->id){
+                $oldTag = $this->getArticleTags($this->id);
+            }
+            //利用新旧标签数组 分别获取新增和删除的文章标签数组
+            //获取新增的标签数组
+            $addTag = array_diff($newTag,$oldTag);
+            if(!empty($addTag)){
+                foreach($addTag as $t){
+                    $tagModel = new ArticleTag();
+                    if(!$tagModel->addTag(trim($t))){
+                        return false;
+                    }
+                }
+            }
+            //获取删除的标签数组
+            if(!empty($oldTag)){
+                $delTag = array_diff($oldTag,$newTag);
+                if(!empty($delTag)){
+                    foreach($delTag as $t){
+                        $tagModel = new ArticleTag();
+                        if(!$tagModel->delTag(trim($t))){
+                            return false;
+                        }
+                    }
+                }
             }
         }
         return true;
+    }
+
+    /**
+     * 获取文章标签
+     * @param $id
+     * @return array
+     */
+    public function getArticleTags($id)
+    {
+        $tags = $this->where('id',$id)->value('tag');
+        return empty($tags) ? [] : explode('|',$tags);
     }
 }

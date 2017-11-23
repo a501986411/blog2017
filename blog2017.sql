@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : 127.0.0.1
-Source Server Version : 50617
-Source Host           : 127.0.0.1:3306
+Source Server Version : 50714
+Source Host           : localhost:3306
 Source Database       : blog2017
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-11-23 18:31:21
+Date: 2017-11-24 00:06:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,8 +40,8 @@ CREATE TABLE `blog_article` (
 -- ----------------------------
 -- Records of blog_article
 -- ----------------------------
-INSERT INTO `blog_article` VALUES ('1', 'PHP程序设计', 'PHP|Java|HTML|CSS3', '黑牛儿', '监考老师大姐夫\r\n水电费公司垃圾费\r\n是打发斯蒂芬\r\n十大f', '是的范德萨发\r\n## 十大范德萨发\r\n是的发生大法师的\r\n|  as |按时   |\r\n| ------------ | ------------ |\r\n|  asd | sa  |\r\n|  as | as  |\r\nsdfasfsdafsdf\r\n\r\n    <?php\r\n    /**\r\n     * Created by PhpStorm.\r\n     * User: chl\r\n     * Date: 2017/11/22\r\n     * Time: 13:40\r\n     */\r\n    namespace app\\admin\\controller;\r\n    \r\n    class ArticleManage {\r\n    \r\n        /**\r\n         * 显示文章列表\r\n         * @return \\think\\response\\View\r\n         */\r\n        public function index()\r\n        {\r\n            return view();\r\n        }\r\n    \r\n        public function save()\r\n        {\r\n            print_r(input());\r\n            return false;\r\n        }\r\n    }', '0', '1511432897', '1', '0', '0', '/static/tmpImg/201708252044567037.jpg');
-INSERT INTO `blog_article` VALUES ('2', '图片测试', '图片;PHP;Java;', '黑牛儿', '图片测试', '![](/uploads\\20171122\\c3ade49465f29d204e27fc9b0f5a9142.jpg)\r\nsdfsdfsdf\r\n`sdfsdfsdfsdfsdfsdfsdfsdfsd`\r\n[百度][1]\r\n[1]: http://www.baid.com \"百度\"', '0', '0', '1', '0', '0', '');
+INSERT INTO `blog_article` VALUES ('1', 'PHP程序设计', 'PHP|IOS|AI', '黑牛儿', '监考老师大姐夫\r\n水电费公司垃圾费\r\n是打发斯蒂芬\r\n十大f', '是的范德萨发\r\n## 十大范德萨发\r\n是的发生大法师的\r\n|  as |按时   |\r\n| ------------ | ------------ |\r\n|  asd | sa  |\r\n|  as | as  |\r\nsdfasfsdafsdf\r\n\r\n    <?php\r\n    /**\r\n     * Created by PhpStorm.\r\n     * User: chl\r\n     * Date: 2017/11/22\r\n     * Time: 13:40\r\n     */\r\n    namespace app\\admin\\controller;\r\n    \r\n    class ArticleManage {\r\n    \r\n        /**\r\n         * 显示文章列表\r\n         * @return \\think\\response\\View\r\n         */\r\n        public function index()\r\n        {\r\n            return view();\r\n        }\r\n    \r\n        public function save()\r\n        {\r\n            print_r(input());\r\n            return false;\r\n        }\r\n    }', '0', '1511453118', '1', '0', '0', '/static/tmpImg/201708252044567037.jpg');
+INSERT INTO `blog_article` VALUES ('2', '图片测试', 'IOS|AI|', '黑牛儿', '图片测试', '![](/uploads\\20171122\\c3ade49465f29d204e27fc9b0f5a9142.jpg)\r\nsdfsdfsdf\r\n`sdfsdfsdfsdfsdfsdfsdfsdfsd`\r\n[百度][1]\r\n[1]: http://www.baid.com \"百度\"', '0', '1511453165', '1', '0', '0', '/static/tmpImg/201708252044567037.jpg');
 
 -- ----------------------------
 -- Table structure for blog_article_tag
@@ -55,16 +55,14 @@ CREATE TABLE `blog_article_tag` (
   PRIMARY KEY (`id`),
   KEY `idx_status` (`status`) USING BTREE,
   KEY `idx_showTimes` (`show_times`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='文章标签记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='文章标签记录表';
 
 -- ----------------------------
 -- Records of blog_article_tag
 -- ----------------------------
-INSERT INTO `blog_article_tag` VALUES ('1', '面向对象', '1', '1');
-INSERT INTO `blog_article_tag` VALUES ('2', 'Java', '4', '1');
-INSERT INTO `blog_article_tag` VALUES ('3', 'PHP', '4', '1');
-INSERT INTO `blog_article_tag` VALUES ('4', 'Linux', '1', '1');
-INSERT INTO `blog_article_tag` VALUES ('5', 'CSS3', '1', '1');
+INSERT INTO `blog_article_tag` VALUES ('52', 'PHP', '1', '1');
+INSERT INTO `blog_article_tag` VALUES ('53', 'IOS', '2', '1');
+INSERT INTO `blog_article_tag` VALUES ('54', 'AI', '2', '1');
 
 -- ----------------------------
 -- Table structure for blog_menu

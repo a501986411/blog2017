@@ -8,6 +8,8 @@
 namespace app\admin\controller;
 
 use app\admin\model\Article;
+use think\Exception;
+use think\Db;
 
 class ArticleManage {
 
@@ -27,8 +29,20 @@ class ArticleManage {
     public function save()
     {
         $model = new Article();
-        $ret = $model->allowField(true)->isUpdate(input('post.id'))->save(input());
-        return $ret;
+        try{
+            $model->startTrans();
+            $ret = $model->allowField(true)->isUpdate(input('post.id'))->save(input());
+            if($ret==false){
+                throw  new Exception('');
+            }
+            $model->commit();
+            return true;
+        }catch(\Exception $e){
+            $model->rollback();
+            return false;
+        }
+
+
     }
 
     /**
