@@ -26,8 +26,8 @@ class ArticleManage {
      */
     public function save()
     {
-        $model = new Article(input());
-        $ret = $model->allowField(true)->save();
+        $model = new Article();
+        $ret = $model->allowField(true)->isUpdate(input('post.id'))->save(input());
         return $ret;
     }
 
@@ -44,11 +44,40 @@ class ArticleManage {
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
             if($info){
                 //成功
-                echo json_encode(['url'=>APP_UPLOADS.DS.$info->getSaveName(),'success'=>1]);
+                echo json_encode(['url'=>APP_UPLOADS.$info->getSaveName(),'success'=>1]);
             }else{
                 // 上传失败获取错误信息
                 echo json_encode(['url'=>'','success'=>0,'message'=>$file->getError()]);
             }
         }
     }
+
+    /**
+     * 获取文章列表
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getArticleList()
+    {
+        $model = new Article();
+        $result = $model->order('update_time','desc')
+              ->select();
+        return $result;
+    }
+
+    /**
+     * 获取单个文件的信息
+     * @return array|false|\PDOStatement|string|\think\Model
+     */
+    public function getArticleInfo()
+    {
+        $articleId = input('get.articleId');
+        if($articleId){
+            $model = new Article();
+            $result = $model->where('id',$articleId)
+                ->find();
+            return $result;
+        }
+        return [];
+    }
+
 }

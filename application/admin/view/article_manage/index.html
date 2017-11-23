@@ -1,3 +1,4 @@
+
 <div id="content">
     <div v-show="!editPage">
         <button class="layui-btn" id="add_menu" v-on:click="addArticle()"><i class="layui-icon">&#xe608;</i>添加</button>
@@ -5,25 +6,33 @@
             <thead >
             <tr>
                 <th>序号</th>
-                <th>名称</th>
-                <th>URL</th>
+                <th>标题</th>
+                <th>描述</th>
+                <th>标签</th>
+                <th>作者</th>
+                <th>阅读数</th>
+                <th>评论数</th>
                 <th>状态</th>
-                <th>排序</th>
+                <th>首图</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(item,index) in articleList">
                 <td>{{++index}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.url}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.tag}}</td>
+                <td>{{item.author}}</td>
+                <td>{{item.visit_num}}</td>
+                <td>{{item.comment_num}}</td>
                 <td>{{item.status_text}}</td>
-                <td>{{item.sort}}</td>
+                <td><img v-bind:src="item.index_img"/></td>
                 <td>
                     <button class="layui-btn-sm layui-btn layui-btn-danger">
                         停用
                     </button>
-                    <button class="layui-btn-sm layui-btn">
+                    <button class="layui-btn-sm layui-btn" @click="addArticle(item.id)">
                         编辑
                     </button>
                 </td>
@@ -33,32 +42,33 @@
     </div>
     <div v-show="editPage">
         <form class="layui-form layui-form-pane " id="article_fm">
+            <input type="hidden" name="id" v-bind:value="article.id">
             <div class="layui-form-item">
                 <label class="layui-form-label">文章标题</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input">
+                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入文章标题" v-bind:value="article.title" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">描述信息:</label>
                 <div class="layui-input-block">
-                    <textarea name="description" placeholder="请输入文章简要描述信息" class="layui-textarea"></textarea>
+                    <textarea name="description" placeholder="请输入文章简要描述信息" class="layui-textarea">{{article.description}}</textarea>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">标签:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="tag" required  lay-verify="required" placeholder="请输入文章标签,多个用“;”分割" autocomplete="off" class="layui-input">
+                    <input type="text" name="tag" required  lay-verify="required" placeholder="请输入文章标签,多个用“|”分割" autocomplete="off" v-bind:value="article.tag" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">作者:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="author" required  lay-verify="required"  autocomplete="off" class="layui-input" value="黑牛儿">
+                    <input type="text" name="author" required  lay-verify="required"  autocomplete="off" class="layui-input"  v-bind:value="article.author">
                 </div>
             </div>
             <div id="test-editormd">
-                <textarea name="content"  style="display:none;"></textarea>
+                <textarea name="content" style="display: none;">{{article.content}}</textarea>
             </div>
         </form>
         <div class="layui-form-item" style="text-align: center;">
@@ -75,16 +85,56 @@
         el:"#content",
         data:{
             articleList:[],
-            editPage:true,
+            editPage:false,
+            article:{
+                id:0,
+                author:'黑牛儿',
+                content:'',
+            }
+        },
+        created:function(){
+            this.getArticleList();
         },
         methods:{
-            addArticle:function(){
+            getArticleList:function(){
+                var _self = this;
+                $.get("{:url('ArticleManage/getArticleList')}",function(result){
+                    _self.articleList = result;
+                }) ;
+            },
+            addArticle:function(articleId){
                 this.editPage = true;
-                $("#article_fm")[0].reset();
+                var _self = this;
+                $.get('/ArticleManage/getArticleInfo?articleId='+articleId,function(result){
+                    if(result){
+                        _self.article = result;
+                    }
+                    editormd("test-editormd", {
+                        width: "100%",
+                        height: 800,
+                        path : '{$Think.const.EDITOR_LIB}',
+                        markdown : _self.article.content,
+                        codeFold : true,
+                        saveHTMLToTextarea : true,
+                        searchReplace : true,
+                        htmlDecode : "style,script,iframe|on*",
+                        emoji : true,
+                        taskList : true,
+                        tocm            : true,         // Using [TOCM]
+                        tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+                        flowChart : true,             // 开启流程图支持，默认关闭
+                        sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+                        imageUpload : true,
+                        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                        imageUploadURL : "/ArticleManage/upload",
+                        onload : function() {}
+                    });
+                });
             },
             cancel:function(){
                 this.editPage = false;
                 $("#article_fm")[0].reset();
+                this.getArticleList();
             },
             saveArticle:function(){
                 var _self = this;
@@ -102,28 +152,5 @@
             }
         }
     });
-    $(function() {
-        editormd("test-editormd", {
-            width: "100%",
-            height: 800,
-            path : '{$Think.const.APP_PUBLIC}Editor.md/lib/',
-            markdown : '',
-            codeFold : true,
-            saveHTMLToTextarea : true,
-            searchReplace : true,
-            htmlDecode : "style,script,iframe|on*",
-            emoji : true,
-            taskList : true,
-            tocm            : true,         // Using [TOCM]
-            tex : true,                   // 开启科学公式TeX语言支持，默认关闭
-            flowChart : true,             // 开启流程图支持，默认关闭
-            sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
-            imageUpload : true,
-            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/ArticleManage/upload",
-            onload : function() {}
-        });
-});
-
 </script>
 

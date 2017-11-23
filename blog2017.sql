@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-11-22 17:26:32
+Date: 2017-11-23 18:31:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `blog_article` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态；1：正常，2：屏蔽',
   `visit_num` int(11) NOT NULL DEFAULT '0' COMMENT '阅读次数',
   `comment_num` int(11) NOT NULL DEFAULT '0' COMMENT '评论条数',
+  `index_img` varchar(255) NOT NULL DEFAULT '' COMMENT '首图地址',
   PRIMARY KEY (`id`),
   KEY `idx_visit` (`visit_num`) USING BTREE,
   KEY `idx_comment` (`comment_num`) USING BTREE
@@ -39,8 +40,31 @@ CREATE TABLE `blog_article` (
 -- ----------------------------
 -- Records of blog_article
 -- ----------------------------
-INSERT INTO `blog_article` VALUES ('1', 'PHP程序设计', '', '', '监考老师大姐夫\r\n水电费公司垃圾费\r\n是打发斯蒂芬\r\n十大f', '是的范德萨发\r\n## 十大范德萨发\r\n是的发生大法师的\r\n|  as |按时   |\r\n| ------------ | ------------ |\r\n|  asd | sa  |\r\n|  as | as  |\r\nsdfasfsdafsdf\r\n\r\n    <?php\r\n    /**\r\n     * Created by PhpStorm.\r\n     * User: chl\r\n     * Date: 2017/11/22\r\n     * Time: 13:40\r\n     */\r\n    namespace app\\admin\\controller;\r\n    \r\n    class ArticleManage {\r\n    \r\n        /**\r\n         * 显示文章列表\r\n         * @return \\think\\response\\View\r\n         */\r\n        public function index()\r\n        {\r\n            return view();\r\n        }\r\n    \r\n        public function save()\r\n        {\r\n            print_r(input());\r\n            return false;\r\n        }\r\n    }', '0', '0', '1', '0', '0');
-INSERT INTO `blog_article` VALUES ('2', '图片测试', '图片;PHP;Java;', '黑牛儿', '图片测试', '![](/uploads\\20171122\\c3ade49465f29d204e27fc9b0f5a9142.jpg)\r\nsdfsdfsdf\r\n`sdfsdfsdfsdfsdfsdfsdfsdfsd`\r\n[百度][1]\r\n[1]: http://www.baid.com \"百度\"', '0', '0', '1', '0', '0');
+INSERT INTO `blog_article` VALUES ('1', 'PHP程序设计', 'PHP|Java|HTML|CSS3', '黑牛儿', '监考老师大姐夫\r\n水电费公司垃圾费\r\n是打发斯蒂芬\r\n十大f', '是的范德萨发\r\n## 十大范德萨发\r\n是的发生大法师的\r\n|  as |按时   |\r\n| ------------ | ------------ |\r\n|  asd | sa  |\r\n|  as | as  |\r\nsdfasfsdafsdf\r\n\r\n    <?php\r\n    /**\r\n     * Created by PhpStorm.\r\n     * User: chl\r\n     * Date: 2017/11/22\r\n     * Time: 13:40\r\n     */\r\n    namespace app\\admin\\controller;\r\n    \r\n    class ArticleManage {\r\n    \r\n        /**\r\n         * 显示文章列表\r\n         * @return \\think\\response\\View\r\n         */\r\n        public function index()\r\n        {\r\n            return view();\r\n        }\r\n    \r\n        public function save()\r\n        {\r\n            print_r(input());\r\n            return false;\r\n        }\r\n    }', '0', '1511432897', '1', '0', '0', '/static/tmpImg/201708252044567037.jpg');
+INSERT INTO `blog_article` VALUES ('2', '图片测试', '图片;PHP;Java;', '黑牛儿', '图片测试', '![](/uploads\\20171122\\c3ade49465f29d204e27fc9b0f5a9142.jpg)\r\nsdfsdfsdf\r\n`sdfsdfsdfsdfsdfsdfsdfsdfsd`\r\n[百度][1]\r\n[1]: http://www.baid.com \"百度\"', '0', '0', '1', '0', '0', '');
+
+-- ----------------------------
+-- Table structure for blog_article_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_article_tag`;
+CREATE TABLE `blog_article_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `tag` varchar(60) NOT NULL DEFAULT '' COMMENT '文章标签',
+  `show_times` tinyint(11) NOT NULL DEFAULT '1' COMMENT '出现次数',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态；1：正常，2：屏蔽',
+  PRIMARY KEY (`id`),
+  KEY `idx_status` (`status`) USING BTREE,
+  KEY `idx_showTimes` (`show_times`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='文章标签记录表';
+
+-- ----------------------------
+-- Records of blog_article_tag
+-- ----------------------------
+INSERT INTO `blog_article_tag` VALUES ('1', '面向对象', '1', '1');
+INSERT INTO `blog_article_tag` VALUES ('2', 'Java', '4', '1');
+INSERT INTO `blog_article_tag` VALUES ('3', 'PHP', '4', '1');
+INSERT INTO `blog_article_tag` VALUES ('4', 'Linux', '1', '1');
+INSERT INTO `blog_article_tag` VALUES ('5', 'CSS3', '1', '1');
 
 -- ----------------------------
 -- Table structure for blog_menu
