@@ -29,11 +29,20 @@
                 <td>{{item.status_text}}</td>
                 <td><img v-bind:src="item.index_img"/></td>
                 <td>
-                    <button class="layui-btn-sm layui-btn layui-btn-danger">
-                        停用
+                    <button class="layui-btn-sm layui-btn layui-btn-danger" v-if="item.status" @click="stopUse(item.id)">
+                        屏蔽
+                    </button>
+                    <button class="layui-btn-sm layui-btn layui-btn-normal" v-if="!item.status" @click="startUse(item.id)">
+                        启用
                     </button>
                     <button class="layui-btn-sm layui-btn" @click="addArticle(item.id)">
                         编辑
+                    </button>
+                    <button class="layui-btn-sm layui-btn layui-btn-warm" v-if="!item.is_top" @click="setTop(item.id)">
+                        置顶
+                    </button>
+                    <button class="layui-btn-sm layui-btn layui-btn-danger" v-if="item.is_top" @click="cancelSetTop(item.id)">
+                        取消置顶
                     </button>
                 </td>
             </tr>
@@ -148,6 +157,38 @@
                             layer.msg('操作失败');
                         }
                     },
+                });
+            },
+            startUse:function(articleId){ //启用
+                var _self = this;
+                $.get('/ArticleManage/startUse?articleId='+articleId,function(result){
+                    if(result){
+                        _self.getArticleList();
+                    }
+                });
+            },
+            stopUse:function(articleId){ //屏蔽
+                var _self = this;
+                $.get('/ArticleManage/stopUse?articleId='+articleId,function(result){
+                    if(result){
+                        _self.getArticleList();
+                    }
+                });
+            },
+            setTop:function(articleId){ //设置置顶
+                var _self = this;
+                $.get('/ArticleManage/setTopOperate?isTop=1&articleId='+articleId,function(result){
+                    if(result){
+                        _self.getArticleList();
+                    }
+                });
+            },
+            cancelSetTop:function(articleId){ //取消置顶
+                var _self = this;
+                $.get('/ArticleManage/setTopOperate?isTop=0&articleId='+articleId,function(result){
+                    if(result){
+                        _self.getArticleList();
+                    }
                 });
             }
         }

@@ -3,8 +3,10 @@
  */
 var form;
 var layer;
-layui.use(['form','layer'], function(){
+var laypage;
+layui.use(['form','layer','laypage'], function(){
     form = layui.form;
     layer = layui.layer;
+    laypage = layui.laypage;
 
 });

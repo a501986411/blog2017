@@ -38,175 +38,34 @@
     .right-block > ul > li {line-height: 23px;margin: 3px 0;}
 
 </style>
+<div id="">
     <div class="layui-col-md7 body-left">
+        <?php foreach($articleList as $item):?>
         <div class="index-article shadow">
             <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
+                <img  src="{$item['index_img']}" alt="{$item['title']}">
             </div>
             <div class="article-right">
                 <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
+                    <?php if($item['is_top']):?>
+                    <i class="icon-stick" >顶</i>
+                    <?php endif;?>
+                    <a href="/Article/Detail/LY08252045102818">{$item['title']}</a>
                 </div>
                 <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
+                    {$item['description']}
                 </div>
             </div>
             <div class="layui-clear"></div>
             <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{$item['create_time']}</span>
+                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;{$item['author']}</span>
+                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;{$item['comment_num']}</span>
+                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;{$item['visit_num']}</span>
             </div>
         </div>
-        <div class="index-article shadow">
-            <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-            </div>
-            <div class="article-right">
-                <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-                </div>
-                <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-                </div>
-            </div>
-            <div class="layui-clear"></div>
-            <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-            </div>
-        </div>
-        <div class="index-article shadow">
-            <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-            </div>
-            <div class="article-right">
-                <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-                </div>
-                <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-                </div>
-            </div>
-            <div class="layui-clear"></div>
-            <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-            </div>
-        </div>
-        <div class="index-article shadow">
-            <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-            </div>
-            <div class="article-right">
-                <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-                </div>
-                <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-                </div>
-            </div>
-            <div class="layui-clear"></div>
-            <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-            </div>
-        </div>
-        <div class="index-article shadow">
-            <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-            </div>
-            <div class="article-right">
-                <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-                </div>
-                <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-                </div>
-            </div>
-            <div class="layui-clear"></div>
-            <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-            </div>
-        </div>
-        <div class="index-article shadow">
-        <div class="article-left">
-            <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-        </div>
-        <div class="article-right">
-            <div class="article-title">
-                <i class="icon-stick">顶</i>
-                <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-            </div>
-            <div class="article-abstract">
-                .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-            </div>
-        </div>
-        <div class="layui-clear"></div>
-        <div class="article-footer">
-            <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-            <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-            <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-            <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-        </div>
-    </div>
-        <div class="index-article shadow">
-            <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-            </div>
-            <div class="article-right">
-                <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-                </div>
-                <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-                </div>
-            </div>
-            <div class="layui-clear"></div>
-            <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-            </div>
-        </div>
-        <div class="index-article shadow">
-            <div class="article-left">
-                <img src="{$Think.const.APP_PUBLIC}tmpImg/201708252044567037.jpg" alt="【Welcome to .NET Core】ASP.NET Core介绍">
-            </div>
-            <div class="article-right">
-                <div class="article-title">
-                    <i class="icon-stick">顶</i>
-                    <a href="/Article/Detail/LY08252045102818">【Welcome to .NET Core】ASP.NET Core介绍</a>
-                </div>
-                <div class="article-abstract">
-                    .NET Core入门系列第一篇。ASP.NET Core是一个新的开源和跨平台框架，用于构建Web应用。
-                </div>
-            </div>
-            <div class="layui-clear"></div>
-            <div class="article-footer">
-                <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;2017-08-25</span>
-                <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;Absolutely</span>
-                <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;410</span>
-                <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
-            </div>
-        </div>
+        <?php endforeach;?>
+        <div id="page"></div>
     </div>
     <div class="layui-col-md4 body-right">
         <div class="name-card shadow">
@@ -260,3 +119,23 @@
         </div>
     </div>
     <div style="clear:both;"></div>
+</div>
+<script>
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        laypage.render({
+            elem:'page',
+            count:{$total},
+            limit:5,
+            curr: 1,
+            groups:3,
+            first:'首页',
+            last:'尾页',
+            jump:function(obj,first){
+                if(!first){
+                    window.location.href = '/?page='+obj.curr+'&limit='+obj.limit;
+                }
+            }
+        });
+    });
+</script>

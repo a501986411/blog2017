@@ -1,6 +1,9 @@
 /**
  * ¼ÓÔØlayuiÄ£¿é
  */
-layui.use('element', function(){
-    var element = layui.element;
+var element;
+var laypage;
+layui.use(['element','laypage'], function(){
+    element = layui.element;
+    laypage = layui.laypage;
 });

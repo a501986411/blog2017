@@ -13,6 +13,7 @@ class Article extends Model {
     protected $autoWriteTimestamp = true;
     protected $insert = ['index_img'];
     protected $update = ['index_img'];
+    public $statusStr = [1=>'正常',0=>'屏蔽'];
     public static function init()
     {
         Article::event('before_insert',function($article){
@@ -92,4 +93,5 @@ class Article extends Model {
         $tags = $this->where('id',$id)->value('tag');
         return empty($tags) ? [] : explode('|',$tags);
     }
+
 }
