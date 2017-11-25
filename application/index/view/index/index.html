@@ -50,7 +50,7 @@
                     <?php if($item['is_top']):?>
                     <i class="icon-stick" >顶</i>
                     <?php endif;?>
-                    <a href="/Article/Detail/LY08252045102818">{$item['title']}</a>
+                    <a href="<?php echo url('Article/show','module=2&articleId='.$item['id']);?>">{$item['title']}</a>
                 </div>
                 <div class="article-abstract">
                     {$item['description']}
