@@ -20,24 +20,13 @@
     <div class="nav nav-common layui-col-md10">
         <a class="nav-logo" href="/">黑牛儿</a>
         <ul class="nav-common layui-nav" lay-filter="nav">
-            <li class="layui-nav-item layui-this">
-                <a href="/"><i class="fa fa-home fa-fw"></i>首页</a>
+            <li class="layui-nav-item layui-this" id="home">
+                <a href="{:url('Index/index','module=1')}"><i class="fa fa-home fa-fw"></i>首页</a>
             </li>
-            <li class="layui-nav-item">
-                <a href="">程序猿</a>
-                <dl class="layui-nav-child">
-                    <dd><a>技术</a></dd>
-                    <dd><a>工作</a></dd>
-                </dl>
+            <li class="layui-nav-item" id="article">
+                <a href="{:url('Article/index','module=2')}"><i class="fa fa-book fa-fw"></i>程序猿</a>
             </li>
-            <li class="layui-nav-item">
-                <a href="">生活</a>
-                <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                    <dd><a href="">心情</a></dd>
-                    <dd><a href="">感想</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">关于</a></li>
+            <li class="layui-nav-item" id="about"><a href="">关于</a></li>
         </ul>
     </div>
 </nav>

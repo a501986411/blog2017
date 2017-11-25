@@ -1,17 +1,32 @@
 <?php
 namespace app\index\controller;
 
-use app\admin\model\Article;
+use app\index\model\Article;
 
-class Index
+
+class Index extends Right
 {
+    protected $beforeActionList = [
+        'getRightData' => ['only'=>'index']
+    ];
+
+    /**
+     * 首页
+     * @return \think\response\View
+     */
     public function index()
     {
-        $page = input('get.page') ? input('get.page') : 1;
-        $rows = input('get.limit') ?  input('get.limit') : 5;
-        $result = Article::where('status',1)->page($page,$rows)->select();
-        $total = Article::where('status',1)->count();
-        return view('',['articleList'=>$result,'total'=>$total]);
+        $article = new Article();
+        $page = input('page') ? input('page') : 1;
+        $rows = input('limit') ? input('limit') :7;
+        $result = $article->getArticleList($page,$rows);
+        $returnData = ['articleList' => $result['rows'],
+            'total' => $result['total'],
+            'page' => $page,
+        ];
+        return view('',$returnData);
     }
+
+
 
 }

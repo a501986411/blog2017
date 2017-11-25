@@ -50,7 +50,7 @@
                     <?php if($item['is_top']):?>
                     <i class="icon-stick" >顶</i>
                     <?php endif;?>
-                    <a href="/Article/Detail/LY08252045102818">{$item['title']}</a>
+                    <a href="<?php echo url('Article/show','module=2&articleId='.$item['id']);?>" data-id="{$item['id']}">{$item['title']}</a>
                 </div>
                 <div class="article-abstract">
                     {$item['description']}
@@ -65,5 +65,25 @@
             </div>
         </div>
         <?php endforeach;?>
+        <div id="page"></div>
     </div>
 </div>
+<script>
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        laypage.render({
+            elem:'page',
+            count:"{$total}",
+            limit:7,
+            curr: "{$page}",
+            groups:3,
+            first:'首页',
+            last:'尾页',
+            jump:function(obj,first){
+                if(!first){
+                    window.location.href = '/?page='+obj.curr+'&limit='+obj.limit;
+                }
+            }
+        });
+    });
+</script>
