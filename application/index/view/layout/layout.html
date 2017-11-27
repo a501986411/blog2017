@@ -60,7 +60,7 @@
             <div class="title">热文推荐</div>
             <ul class="fa-ul">
                 <?php foreach($hotArticle as $value):?>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>{$value['title']}</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a href="<?php echo url('Article/show','module=2&articleId='.$value['id']);?>">{$value['title']}</a></li>
                 <?php endforeach;?>
             </ul>
         </div>
@@ -68,7 +68,7 @@
             <div class="title">最新文章</div>
             <ul class="fa-ul">
                 <?php foreach($bestArticle as $value):?>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>{$value['title']}</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a href="<?php echo url('Article/show','module=2&articleId='.$value['id']);?>">{$value['title']}</a></li>
                 <?php endforeach;?>
             </ul>
         </div>
