@@ -13,7 +13,8 @@ use think\Exception;
 class Article  extends  Right{
 
     protected $beforeActionList = [
-        'getRightData' => ['only'=>'index,show']
+        'getRightData' => ['only'=>'index,show'],
+        'setModule' => ['only'=>'index,show']
     ];
 
 

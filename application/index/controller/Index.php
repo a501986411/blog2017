@@ -7,7 +7,8 @@ use app\index\model\Article;
 class Index extends Right
 {
     protected $beforeActionList = [
-        'getRightData' => ['only'=>'index']
+        'getRightData' => ['only'=>'index'],
+         'setModule' => ['only'=>'index']
     ];
 
     /**

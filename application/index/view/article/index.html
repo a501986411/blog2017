@@ -1,6 +1,6 @@
 <style>
-    .body-left{margin-top: 70px;float: left;}
-    .body-right{margin-top: 70px;margin-left: 20px;float: left;}
+    .body-left{margin-top: 25px;float: left;}
+    .body-right{margin-top: 25px;margin-left: 20px;float: left;}
     .index-article{
         padding: 15px;
         margin-bottom: 10px;
@@ -10,6 +10,7 @@
         -o-transition: all 0.3s linear;
         -webkit-transition: all 0.3s linear;
         transition: all 0.3s linear;
+        border-radius:20px;
     }
     .index-article > .article-left {width: 25%;float: left;}
     .index-article > .article-right {float: left;width: 75%;}
@@ -39,6 +40,10 @@
 
 </style>
 <div id="">
+    <blockquote class="crumbs shadow">
+        <a href="{:url('/')}" title="网站首页">首页<span class="layui-box">&gt;</span></a>
+        <a href="{:url('Article/index','module=2')}" title="程序猿">程序猿</a>
+    </blockquote>
     <div class="layui-col-md7 body-left">
         <?php foreach($articleList as $item):?>
         <div class="index-article shadow">
@@ -81,7 +86,7 @@
             last:'尾页',
             jump:function(obj,first){
                 if(!first){
-                    window.location.href = '/?page='+obj.curr+'&limit='+obj.limit;
+                    window.location.href = 'Article/index/?page='+obj.curr+'&limit='+obj.limit;
                 }
             }
         });

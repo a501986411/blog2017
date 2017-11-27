@@ -1,6 +1,6 @@
 <style>
-    .body-left{margin-top: 70px;float: left;}
-    .body-right{margin-top: 70px;margin-left: 20px;float: left;}
+    .body-left{margin-top: 25px;float: left;}
+    .body-right{margin-top: 25px;margin-left: 20px;float: left;}
     .index-article{
         padding: 15px;
         margin-bottom: 10px;
@@ -10,6 +10,7 @@
         -o-transition: all 0.3s linear;
         -webkit-transition: all 0.3s linear;
         transition: all 0.3s linear;
+        border-radius:20px;
     }
     .index-article > .article-left {width: 25%;float: left;}
     .index-article > .article-right {float: left;width: 75%;}
@@ -36,8 +37,18 @@
     .right-block {background-color: white;padding: 0 15px;margin-bottom:15px;}
     .right-block > .title {border-bottom: 1px solid #009688;font-size: 15px;padding: 0 0 5px 0;margin-bottom: 5px;}
     .right-block > ul > li {line-height: 23px;margin: 3px 0;}
-
+    .layui-carousel > div > div > img{width: 100%;}
 </style>
+<div class="layui-carousel" id="test1" style="margin-top: 70px;">
+    <div carousel-item>
+        <div>
+            <img src="{$Think.const.APP_PUBLIC}tmpImg/banner1.jpg">
+        </div>
+        <div>
+            <img src="{$Think.const.APP_PUBLIC}tmpImg/banner2.jpg">
+        </div>
+    </div>
+</div>
 <div id="">
     <div class="layui-col-md7 body-left">
         <?php foreach($articleList as $item):?>
@@ -67,3 +78,16 @@
         <?php endforeach;?>
     </div>
 </div>
+<script>
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '93.5%' //设置容器宽度
+            ,arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+</script>
