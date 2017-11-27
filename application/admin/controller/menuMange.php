@@ -9,6 +9,7 @@ namespace app\admin\controller;
 
 use app\admin\model\Menu;
 use think\Controller;
+use think\Exception;
 
 class MenuMange extends Controller{
 
@@ -46,5 +47,36 @@ class MenuMange extends Controller{
         }else{
             return false;
         }
+    }
+
+    /**
+     * 菜单操作
+     * @return bool
+     */
+    public function operateMenu()
+    {
+        $isUse = input('isUse');
+        $menuId = input('menuId');
+        $model = new Menu();
+        try{
+            $model->startTrans();
+            if(!$isUse){
+                $result = $model->stopChildMenu($menuId);
+                if($result === false){
+                    exception('修改失败');
+                }
+            }
+            $model = $model->where('id',$menuId)->find();
+            $model->status = $isUse;
+            $ret = $model->save();
+            if($ret === false){
+                exception('修改失败');
+            }
+            $model->commit();
+        }catch(Exception $e){
+            $model->rollback();
+            return ['success'=>false,'msg'=>$e->getMessage()];
+        }
+        return ['success'=>true];
     }
 }

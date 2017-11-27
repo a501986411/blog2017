@@ -57,4 +57,18 @@ class Menu  extends Model {
          $statusConf = [0=>'停用', 1=>'启用'];
          return $statusConf[$data['status']];
     }
+
+    /**
+     * 停用子菜单
+     * @param $pid
+     * @return bool
+     */
+    public function stopChildMenu($pid)
+    {
+        $ret = $this->isUpdate(true)->save(['status'=>0],['pid'=>$pid]);
+        if($ret===false){
+            return false;
+        }
+        return true;
+    }
 }

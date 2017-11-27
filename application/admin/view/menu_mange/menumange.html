@@ -20,8 +20,11 @@
             <td>{{item.status_text}}</td>
             <td>{{item.sort}}</td>
             <td>
-                <button class="layui-btn-sm layui-btn layui-btn-danger">
-                    停用
+                <button class="layui-btn-sm layui-btn layui-btn-normal" @click="operateMenu(item.id,1)" v-if="!item.status">
+                    启用
+                </button>
+                <button class="layui-btn-sm layui-btn layui-btn-danger" @click="operateMenu(item.id,0)" v-if="item.status">
+                   停用
                 </button>
                 <button class="layui-btn-sm layui-btn">
                     编辑
@@ -124,6 +127,15 @@
             cancel:function(){
                 $("#menu_fm")[0].reset();
                 this.editPage=false;
+            },
+            operateMenu:function(menuId,isUse){ //
+                var _self = this;
+                $.get('/MenuMange/operateMenu?isUse='+isUse+'&menuId='+menuId,function(result){
+                    if(!result.success){
+                        layer.msg(result.msg)
+                    }
+                    history.go(0);
+                });
             },
         }
     });
