@@ -1,6 +1,6 @@
 <div id="content">
 <div v-show="!editPage">
-    <button class="layui-btn" id="add_menu" v-on:click="addMenu()"><i class="layui-icon">&#xe608;</i>添加</button>
+    <button class="layui-btn" id="add_menu" v-on:click="addMenu(0)"><i class="layui-icon">&#xe608;</i>添加</button>
     <table id="menu_tb" class="layui-table" lay-size="md">
         <thead >
         <tr>
@@ -26,7 +26,7 @@
                 <button class="layui-btn-sm layui-btn layui-btn-danger" @click="operateMenu(item.id,0)" v-if="item.status">
                    停用
                 </button>
-                <button class="layui-btn-sm layui-btn">
+                <button class="layui-btn-sm layui-btn" @click="addMenu(item.id)">
                     编辑
                 </button>
             </td>
@@ -39,19 +39,19 @@
         <div class="layui-form-item">
             <label class="layui-form-label">菜单名称</label>
             <div class="layui-input-block">
-                <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input" v-bind:value="menuData.name">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">URL:</label>
             <div class="layui-input-block">
-                <input type="text" name="url" required  lay-verify="required" placeholder="输入URL" autocomplete="off" class="layui-input">
+                <input type="text" name="url" required  lay-verify="required" placeholder="输入URL" autocomplete="off" class="layui-input" v-bind:value="menuData.url">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">上级菜单</label>
             <div class="layui-input-block">
-                <select name="pid" lay-verify="required" id="pid">
+                <select name="pid" lay-verify="required" id="pid" v-model="menuData.pid">
                     <option value="0">无</option>
                     <?php foreach($topMenuList as $v):?>
                     <option value="{$v['id']}">{$v['sort']}--{$v['name']}</option>
@@ -69,7 +69,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">排序权重:</label>
             <div class="layui-input-block">
-                <input type="text" name="sort" required  lay-verify="required" placeholder="输入排序权重" autocomplete="off" class="layui-input">
+                <input type="text" name="sort" required  lay-verify="required" placeholder="输入排序权重" autocomplete="off" class="layui-input" v-bind:value="menuData.sort">
             </div>
         </div>
     </form>
@@ -87,6 +87,8 @@
         data:{
             menuList:[],
             editPage:false,
+            menuData:{
+            },
         },
         created:function() {
             this.getMenuList();
@@ -99,9 +101,15 @@
                     _self.menuList = result;
                 });
             },
-            addMenu:function(){
-                $("#menu_fm")[0].reset();
+            addMenu:function(menuId){
                 this.editPage = true;
+                if(menuId){
+                   var _self = this;
+                    $.get("/MenuMange/getMenuData?menuId="+menuId,function(result){
+                        _self.menuData = result;
+                    });
+                }
+
             },
             getTopMenuList:function(){
                 var _self = this;

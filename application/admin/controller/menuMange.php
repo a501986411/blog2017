@@ -79,4 +79,16 @@ class MenuMange extends Controller{
         }
         return ['success'=>true];
     }
+
+    /**
+     * 获取菜单数据
+     * @return array|false|\PDOStatement|string|\think\Model
+     */
+    public function getMenuData()
+    {
+        $menuId = input('menuId');
+        $model = new Menu();
+        $result = $model->where('id',$menuId)->find();
+        return $result;
+    }
 }
