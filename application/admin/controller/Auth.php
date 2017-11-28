@@ -14,9 +14,21 @@ use think\Controller;
 class Auth extends Controller
 {
 
+    /**
+     * 首页
+     * @return \think\response\View
+     */
     public function index()
     {
         $this->view->engine->layout(false);
         return view();
+    }
+
+
+    public function login()
+    {
+        $loginName = input('login_name');
+        $password = input('password');
+        return ['success'=>false,'msg'=>'密码错误'];
     }
 }
