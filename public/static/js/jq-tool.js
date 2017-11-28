@@ -22,7 +22,7 @@
             method:'post',
             async:true,
             params:{},
-            onSubmit:function(){},
+            onSubmit:function(){return true;},
             success:function(){},
         }
         var setting = $.extend(defaults,options);
@@ -39,7 +39,7 @@
             async:setting.async,
             data:setting.params,
             beforeSend:function(){
-                setting.onSubmit(formData);
+               return setting.onSubmit(formData);
             },
             success:function(result){
                 setting.success(result);

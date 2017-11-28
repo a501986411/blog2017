@@ -9,7 +9,9 @@
 namespace app\admin\model;
 
 
-class AdminUser
+use think\Model;
+
+class AdminUser extends Model
 {
 
 }

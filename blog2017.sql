@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-11-27 22:36:53
+Date: 2017-11-28 22:10:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,11 +27,12 @@ CREATE TABLE `blog_admin_user` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后一次登录时间',
   `ip` varchar(255) DEFAULT '' COMMENT '最后一次登录IP',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of blog_admin_user
 -- ----------------------------
+INSERT INTO `blog_admin_user` VALUES ('1', 'admin', '黑牛儿', '14e1b600b1fd579f47433b88e8d85291', '0', '');
 
 -- ----------------------------
 -- Table structure for blog_article
