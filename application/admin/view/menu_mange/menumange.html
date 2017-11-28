@@ -36,6 +36,7 @@
 </div>
 <div v-show="editPage">
     <form class="layui-form layui-form-pane " id="menu_fm">
+        <input type="hidden" name="id" v-bind:value="menuData.id">
         <div class="layui-form-item">
             <label class="layui-form-label">菜单名称</label>
             <div class="layui-input-block">
@@ -51,7 +52,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上级菜单</label>
             <div class="layui-input-block">
-                <select name="pid" lay-verify="required" id="pid" v-model="menuData.pid">
+                <select name="pid" id="pid" lay-verify="required" id="pid">
                     <option value="0">无</option>
                     <?php foreach($topMenuList as $v):?>
                     <option value="{$v['id']}">{$v['sort']}--{$v['name']}</option>
@@ -62,8 +63,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="radio" name="status" value="1" title="启用" checked>
-                <input type="radio" name="status" value="0" title="停用" >
+                <input type="radio" name="status" value="1" id="one" title="启用">
+                <input type="radio" name="status" value="0" id="zero" title="停用">
             </div>
         </div>
         <div class="layui-form-item">
@@ -85,14 +86,13 @@
     var content = new Vue({
         el:"#content",
         data:{
+            picked:'',
             menuList:[],
             editPage:false,
-            menuData:{
-            },
+            menuData:{},
         },
         created:function() {
             this.getMenuList();
-            this.getTopMenuList();
         },
         methods:{
             getMenuList:function(){
@@ -102,20 +102,24 @@
                 });
             },
             addMenu:function(menuId){
+                $("#menu_fm")[0].reset();
                 this.editPage = true;
                 if(menuId){
                    var _self = this;
                     $.get("/MenuMange/getMenuData?menuId="+menuId,function(result){
                         _self.menuData = result;
+                        $("#pid").val(result.pid);
+                       if(result.status) {
+                           $("#zero").attr('checked',false);
+                           $("#one").attr('checked',true);
+                       }else{
+                           $("#one").attr('checked',false);
+                           $("#zero").attr('checked',true);
+                       }
+                        layuiForm.render('select');
+                        layuiForm.render('radio');
                     });
                 }
-
-            },
-            getTopMenuList:function(){
-                var _self = this;
-                $.get('/Index/getTopMenuList',function(result){
-                    _self.topMenuList = result.topMenu;
-                });
             },
             saveMenu:function(){
                 var _self = this;
@@ -135,9 +139,9 @@
             cancel:function(){
                 $("#menu_fm")[0].reset();
                 this.editPage=false;
+                this.menuData={};
             },
-            operateMenu:function(menuId,isUse){ //
-                var _self = this;
+            operateMenu:function(menuId,isUse){ //操作菜单
                 $.get('/MenuMange/operateMenu?isUse='+isUse+'&menuId='+menuId,function(result){
                     if(!result.success){
                         layer.msg(result.msg)

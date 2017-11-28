@@ -11,6 +11,7 @@ use think\Model;
 
 class Menu  extends Model {
     protected $statusConf = [0=>'停用', 1=>'启用'];
+    protected $pk = 'id';
     /**
      * 获取顶部菜单
      * @return false|\PDOStatement|string|\think\Collection

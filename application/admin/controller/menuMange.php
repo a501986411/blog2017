@@ -40,12 +40,16 @@ class MenuMange extends Controller{
      */
     public function save()
     {
-        $model = new Menu(input());
-        $ret = $model->allowField(true)->save();
-        if($ret){
-            return true;
+        $model = new Menu();
+        if(input('id')){
+            $ret = $model->isUpdate(true)->save(input());
         }else{
+            $ret = $model->allowField(true)->save(input());
+        }
+        if($ret === false){
             return false;
+        }else{
+            return true;
         }
     }
 
