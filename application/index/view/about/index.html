@@ -5,8 +5,14 @@
     .name-card {text-align: center;margin-top: 10px;}
     .name-card > p{margin-top: 10px;}
     .show-this {border-bottom: 2px solid #5fb878;}
+    .about_web {text-align: center;}
+    .about_web > p {line-height: 30px;font-size: 15px;font-family: cursive;color: maroon;}
+    .leave-logo > img{border-radius: 50%;height: 45px;width: 45px;margin: 5px 5px 5px 0;position: absolute;}
+    .leave-name  {padding: 5px;margin-left: 50px;color: #01AAED;}
 </style>
-<script src="{$Think.const.APP_PUBLIC}vue.js"></script>
+
+<script type="text/javascript" src="{$Think.const.APP_PUBLIC}xheditor/xheditor.js"></script>
+<script type="text/javascript" src="{$Think.const.APP_PUBLIC}xheditor/xheditor_lang/zh-cn.js"></script>
 <div id="about_info" style="width: 94%;">
     <blockquote class="crumbs shadow">
         <a href="{:url('/')}" title="网站首页">首页<span class="layui-box">&gt;</span></a>
@@ -35,11 +41,45 @@
                 </div>
             </div>
         </div >
-        <div class="layui-hide" id="about-web">关于网站</div>
-        <div class="layui-hide" id="about-comment">我有话说</div>
+        <div class="layui-hide about_web" id="about-web">
+            <p>作为一个程序猿,我一直想拥有一个属于我自己的网站，用来记录学习或者工作中的点点滴滴。</p>
+            <p>很多次的开头，又很多次的无疾而终。每次都以“我不想写前段代码、不会设计、没有美感、做出来不好看......”为理由而半途而废。</p>
+            <p>久而久之我就发现除了工作之外，我就变得越来越懒惰，终于前段时间突然醒悟，告诉自己一定要做一个自己的网站出来，就算做的不好，这也是进步。</p>
+            <p>网站第一个版本（v.1.0.0）主要实现“程序猿”这个模块，用于记录自己在程序猿这条路上的点点滴滴。。。。。</p>
+        </div>
+        <div class="layui-hide" id="about-comment" style="margin: 10px">
+            <textarea id="comment"  class="xheditor-simple" rows="12" cols="80" style="width:95%;top:10px;">
+            </textarea>
+            <div style="margin: 10px 0;">
+                <button class="layui-btn" onclick="submit()">提交留言</button>
+            </div>
+            <ul class="leave-msg">
+                <li>
+                    <div class="leave-logo">
+                        <img src="{$Think.const.APP_PUBLIC}tmpImg/heiniuer.jpg" alt="黑牛儿"/>
+                        <div class="leave-name">
+                            <span>黑牛儿</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 <script>
+
+function submit()
+{
+    var comment = $("#comment").val();
+    $.post('{:url("About/leaveMsg")}',{content:comment},function(result){
+        if(result.success){
+            history.go(0);
+        }else{
+            layer.msg(result.msg);
+        }
+    });
+}
+
 function changeInfo(obj,index)
 {
     var arr = new Array();

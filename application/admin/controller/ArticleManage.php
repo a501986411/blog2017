@@ -11,7 +11,7 @@ use app\admin\model\Article;
 use think\Exception;
 use think\Db;
 
-class ArticleManage
+class ArticleManage extends Auth
 {
 
     /**

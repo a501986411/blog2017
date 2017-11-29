@@ -3,10 +3,10 @@ namespace app\admin\controller;
 
 use app\admin\model\Menu;
 
-class Index
+class Index extends Before
 {
     /**
-     * ��ҳ
+     * 首页
      * @return \think\response\View
      */
     public function index()
@@ -21,7 +21,7 @@ class Index
 
 
     /**
-     * 获取顶部菜单
+     * 获去顶部菜单列表
      * @return mixed
      */
     public function getTopMenuList(){
@@ -31,7 +31,7 @@ class Index
     }
 
     /**
-     * 获取左侧菜单
+     * 获取子菜单列表
      * @return mixed
      */
     public function getChildMenu()

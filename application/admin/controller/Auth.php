@@ -9,7 +9,9 @@
 namespace app\admin\controller;
 
 
+use app\admin\model\AdminUser;
 use think\Controller;
+use think\Cookie;
 
 class Auth extends Controller
 {
@@ -20,15 +22,33 @@ class Auth extends Controller
      */
     public function index()
     {
+        if(Cookie::has(config('cookie_user'))){ //若存在登录信息，就跳转到首页
+            $this->redirect(url('Index/index'));
+        }
         $this->view->engine->layout(false);
         return view();
     }
 
-
+    /**
+     * 登录操作
+     * @return array
+     */
     public function login()
     {
         $loginName = input('login_name');
         $password = input('password');
-        return ['success'=>false,'msg'=>'密码错误'];
+        $model = new AdminUser();
+        $loginResult = $model->loginAuth($loginName,$password);
+        return $loginResult;
     }
+
+    /**
+     * 登出
+     */
+    public function loginOut()
+    {
+        cookie(config('cookie_user'),null);
+        return true;
+    }
+
 }

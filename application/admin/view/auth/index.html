@@ -19,7 +19,7 @@
 <script src="{$Think.const.APP_PUBLIC}vue.js"></script>
 <script src="{$Think.const.APP_PUBLIC}js/layui_admin_use.js"></script>
 <body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin" id="login">
+    <div class="layui-layout layui-layout-admin" id="login" @keyup.enter="login()">
         <div class="title">
             <h2>后台登录</h2>
         </div>
@@ -65,7 +65,7 @@
                     },
                     success:function(result){
                         if(result.success){
-                            layer.msg(result.msg);
+                            location.href="{:url('Index/index')}";
                         }else{
                             layer.msg(result.msg);
                         }

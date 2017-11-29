@@ -30,7 +30,7 @@
                         <dd><a href="">安全设置</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">退了</a></li>
+                <li class="layui-nav-item"><a @click="loginOut()">退了</a></li>
             </ul>
         </div>
         <div class="layui-side layui-bg-black" style="width: 130px;" v-if="isShow">
@@ -83,6 +83,13 @@
                 var _self = this;
                 $.get('/Index/getTopMenuList',function(result){
                     _self.topMenu = result.topMenu;
+                });
+            },
+            loginOut:function(){
+                $.get('/Auth/loginOut',function(result){
+                    if(result){
+                        location.href="{:url('Auth/index')}";
+                    }
                 });
             }
         }

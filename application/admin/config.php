@@ -11,4 +11,21 @@ return [
         'layout_on'=>true,
         'layout_name'=>'layout/layout'
     ],
+    'cookie_user' => 'user',
+    'cookie'                 => [
+        // cookie 名称前缀
+        'prefix'    => 'admin_',
+        // cookie 保存时间
+        'expire'    => bcmul(3600,0.5),
+        // cookie 保存路径
+        'path'      => '/',
+        // cookie 有效域名
+        'domain'    => '',
+        //  cookie 启用安全传输
+        'secure'    => false,
+        // httponly设置
+        'httponly'  => '',
+        // 是否使用 setcookie
+        'setcookie' => true,
+    ],
 ];

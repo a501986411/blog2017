@@ -8,10 +8,9 @@
 namespace app\admin\controller;
 
 use app\admin\model\Menu;
-use think\Controller;
 use think\Exception;
 
-class MenuMange extends Controller{
+class MenuMange extends Auth{
 
     /**
      * 菜单管理页面

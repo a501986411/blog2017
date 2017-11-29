@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : 127.0.0.1
-Source Server Version : 50714
-Source Host           : localhost:3306
+Source Server Version : 50617
+Source Host           : 127.0.0.1:3306
 Source Database       : blog2017
 
 Target Server Type    : MYSQL
-Target Server Version : 50714
+Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-11-28 22:10:02
+Date: 2017-11-29 18:06:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `blog_admin_user` (
   `login_name` varchar(255) DEFAULT '' COMMENT '登录账号',
   `user_name` varchar(255) DEFAULT '' COMMENT '用户名',
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '密码加密字符串',
-  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后一次登录时间',
+  `last_login_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后一次登录时间',
   `ip` varchar(255) DEFAULT '' COMMENT '最后一次登录IP',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -32,7 +32,7 @@ CREATE TABLE `blog_admin_user` (
 -- ----------------------------
 -- Records of blog_admin_user
 -- ----------------------------
-INSERT INTO `blog_admin_user` VALUES ('1', 'admin', '黑牛儿', '14e1b600b1fd579f47433b88e8d85291', '0', '');
+INSERT INTO `blog_admin_user` VALUES ('1', 'admin', '黑牛儿', '14e1b600b1fd579f47433b88e8d85291', '1511934328', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for blog_article
@@ -108,6 +108,30 @@ INSERT INTO `blog_article_tag` VALUES ('64', 'Javascript', '1', '1');
 INSERT INTO `blog_article_tag` VALUES ('65', '金额转大写', '1', '1');
 INSERT INTO `blog_article_tag` VALUES ('66', '数据同步', '1', '1');
 INSERT INTO `blog_article_tag` VALUES ('67', '主从数据库', '1', '1');
+
+-- ----------------------------
+-- Table structure for blog_leave_msg
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_leave_msg`;
+CREATE TABLE `blog_leave_msg` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `content` text CHARACTER SET utf8 NOT NULL COMMENT '留言内容',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '上级Id',
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '创建留言用户Id，0为游客',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：1：正常，0：屏蔽',
+  `is_read` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已读；0：未读，1：已读',
+  PRIMARY KEY (`id`),
+  KEY `idx_pid` (`pid`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='访客留言列表';
+
+-- ----------------------------
+-- Records of blog_leave_msg
+-- ----------------------------
+INSERT INTO `blog_leave_msg` VALUES ('1', '<p>第一条留言<img alt=\"大笑\" src=\"/static/xheditor/xheditor_emot/default/laugh.gif\" /></p><p>测试</p>', '0', '0', '0', '1', '0');
+INSERT INTO `blog_leave_msg` VALUES ('2', '第二条留言', '0', '0', '0', '1', '0');
+INSERT INTO `blog_leave_msg` VALUES ('3', '第三条留言', '0', '0', '0', '1', '0');
+INSERT INTO `blog_leave_msg` VALUES ('4', '<p><img alt=\"微笑\" src=\"/static/xheditor/xheditor_emot/default/smile.gif\" /><img alt=\"大哭\" src=\"/static/xheditor/xheditor_emot/default/wail.gif\" /><img alt=\"惊讶\" src=\"/static/xheditor/xheditor_emot/default/ohmy.gif\" /></p><p>第四条留言</p>', '0', '0', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for blog_menu
