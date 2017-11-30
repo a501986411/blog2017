@@ -9,6 +9,11 @@
     .about_web > p {line-height: 30px;font-size: 15px;font-family: cursive;color: maroon;}
     .leave-logo > img{border-radius: 50%;height: 45px;width: 45px;margin: 5px 5px 5px 0;position: absolute;}
     .leave-name  {padding: 5px;margin-left: 50px;color: #01AAED;}
+    .content{margin-left: 55px;}
+    .leave-footer{margin-left: 55px;margin-top: 10px;}
+    .time{font-size: 13px;padding-right: 5px;}
+    .btn-reply{color: #009688;}
+    .leave-msg > li {border-bottom: 1px dotted #01AAED;padding: 15px 0 10px 0;}
 </style>
 
 <script type="text/javascript" src="{$Think.const.APP_PUBLIC}xheditor/xheditor.js"></script>
@@ -48,21 +53,10 @@
             <p>网站第一个版本（v.1.0.0）主要实现“程序猿”这个模块，用于记录自己在程序猿这条路上的点点滴滴。。。。。</p>
         </div>
         <div class="layui-hide" id="about-comment" style="margin: 10px">
-            <textarea id="comment"  class="xheditor-simple" rows="12" cols="80" style="width:95%;top:10px;">
-            </textarea>
-            <div style="margin: 10px 0;">
-                <button class="layui-btn" onclick="submit()">提交留言</button>
-            </div>
-            <ul class="leave-msg">
-                <li>
-                    <div class="leave-logo">
-                        <img src="{$Think.const.APP_PUBLIC}tmpImg/heiniuer.jpg" alt="黑牛儿"/>
-                        <div class="leave-name">
-                            <span>黑牛儿</span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <!-- UY BEGIN -->
+            <div id="uyan_frame"></div>
+            <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150821"></script>
+            <!-- UY END -->
         </div>
     </div>
 </div>
@@ -95,6 +89,5 @@ function changeInfo(obj,index)
             $("#"+v).addClass('layui-hide');
         }
     });
-
 }
 </script>

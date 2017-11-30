@@ -16,10 +16,14 @@ class About extends Right
     protected $beforeActionList = [
         'setModule' => ['only'=>'index']
     ];
+
    public function index()
    {
        $this->view->engine->layout('layout/about');
-       return view();
+       $model = new LeaveMsg();
+       $page = input('page') ? input('page') : 1;
+       $leaveMsg = $model->getLeaveMsgList($page);
+       return view('',['leaveMsg'=>$leaveMsg['rows'],'total'=>$leaveMsg['total']]);
    }
 
     /**
