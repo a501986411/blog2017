@@ -128,8 +128,8 @@
                     success:function(result){
                         if(result){
                             _self.getMenuList();
-                            _self.cancel();
                             layer.msg('保存成功')
+                            history.go(0);
                         } else {
                             layer.msg('保存失败')
                         }
