@@ -11,15 +11,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(item,index) in menuList">
+            <tr v-for="(item,index) in friendLinkList">
                 <td>{{++index}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.url}}</td>
+                <td>{{item.web_name}}</td>
+                <td>{{item.web_url}}</td>
                 <td>
-                    <button class="layui-btn-sm layui-btn layui-btn-danger">
+                    <button class="layui-btn-sm layui-btn layui-btn-danger" @click="removeLink(item.id)">
                         删除
                     </button>
-                    <button class="layui-btn-sm layui-btn" @click="addMenu(item.id)">
+                    <button class="layui-btn-sm layui-btn" @click="editLink(item.id)">
                         编辑
                     </button>
                 </td>
@@ -75,7 +75,7 @@
                 if(linkId){
                     var _self = this;
                     $.get("/FriendLink/getlinkData?linkId="+linkId,function(result){
-
+                        _self.linkData = result;
                     });
                 }
             },
@@ -83,9 +83,19 @@
                 var _self = this;
                 $("#friend_fm").formSubmit({
                     url:"{:url('/FriendLink/save')}",
+                    onSubmit:function(data){
+                        if($.is_null(data.web_name)){
+                            layer.msg('网站名称不能为空');
+                            return false;
+                        }
+                        if($.is_null(data.web_name)){
+                            layer.msg('网站地址不能为空');
+                            return false;
+                        }
+                    },
                     success:function(result){
                         if(result){
-                            _self.getFriendLinkList();
+                            _self.cancel();
                             layer.msg('保存成功');
                         } else {
                             layer.msg('保存失败')
@@ -93,7 +103,20 @@
                     }
                 });
             },
+            removeLink:function(linkId){
+                var _self = this;
+                $.get("/FriendLink/removeLink?linkId="+linkId,function(result){
+                    if(result){
+                        layer.msg('删除成功');
+                        _self.getFriendLinkList();
+                    }else{
+                        layer.msg('删除失败');
+                    }
+
+                });
+            },
             cancel:function(){
+                this.getFriendLinkList();
                 $("#friend_fm")[0].reset();
                 this.editPage=false;
                 this.linkData={};

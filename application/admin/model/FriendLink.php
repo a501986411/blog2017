@@ -13,7 +13,5 @@ use think\Model;
 
 class FriendLink extends Model
 {
-    protected $autoWriteTimestamp = 'true';
-    
-
+    protected $createTime='create_time';
 }

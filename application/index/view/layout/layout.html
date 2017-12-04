@@ -76,13 +76,9 @@
         <div class="right-block shadow">
             <div class="title">友情链接</div>
             <ul class="fa-ul">
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP面向对象</a></li>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP字符函数处理</a></li>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP文件处理方法</a></li>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>PHP高精度运算</a></li>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>JS实现异步请求</a></li>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>MySql之索引优化</a></li>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a>Linux环境兑换</a></li>
+                <?php foreach($link as $value):?>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a target="_blank" href="{$value['web_url']}">{$value['web_name']}</a></li>
+                <?php endforeach;?>
             </ul>
         </div>
     </div>

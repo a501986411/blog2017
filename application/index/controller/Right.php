@@ -7,6 +7,7 @@
  */
 namespace  app\index\controller;
 
+use app\admin\model\FriendLink;
 use app\index\model\Article as RightArc;
 use think\Controller;
 
@@ -18,10 +19,13 @@ class Right extends  Controller
     public function getRightData()
     {
         $article = new RightArc();
+        $friendLink = new FriendLink();
         $hotArticle = $article->getHotArticleList();
         $bestArticle = $article->getBestArticleList();
+        $link = $friendLink->limit(7)->select();
         $this->assign('hotArticle', $hotArticle);
         $this->assign('bestArticle', $bestArticle);
+        $this->assign('link', $link);
     }
 
     /**
