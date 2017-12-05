@@ -1,6 +1,6 @@
 <style>
-    .body-left{margin-top: 5px;float: left;}
-    .body-right{margin-top: 25px;margin-left: 20px;float: left;}
+    .body-left{margin-top: 5px;float: left;width: 66%;}
+    .body-right{margin-top: 25px;}
     .content{background-color: white;position: relative;width: 100%;  }
     .title{
         text-align: center;
@@ -23,12 +23,12 @@
 </style>
 <link rel="stylesheet" href="{$Think.const.APP_PUBLIC}Editor.md/css/editormd.min.css" />
 <div id="" class="">
-    <blockquote class="crumbs shadow">
+    <blockquote class="crumbs shadow" style="width:100%;">
         <a href="{:url('/')}" title="网站首页">首页<span class="layui-box">&gt;</span></a>
         <a href="{:url('Article/index','module=2')}" title="程序猿">程序猿<span class="layui-box">&gt;</span></a>
-        <a><cite>{$article['title']}</cite></a>
+        <a  href="#"><cite>{$article['title']}</cite></a>
     </blockquote>
-    <div class="layui-col-md7 body-left">
+    <div class="layui-col-md8 body-left">
         <div class="content">
             <div class="title">
                 {$article['title']}

@@ -1,6 +1,6 @@
 <style>
-    .tab {text-align: center;line-height: 35px;border-bottom: 1px solid #1271b7;}
-    .tab > ul > li {display: inline;margin-right: 10px;font-size: 14px;}
+    .tab {text-align: center;border-bottom: 1px solid #1271b7;}
+    .tab > ul > li {display: inline;margin-right: 10px;font-size: 20px;line-height: 25px;}
     .about-info{background-color: white;margin-top: 25px;border-radius: 10px;min-height: 425px;}
     .name-card {text-align: center;margin-top: 10px;}
     .name-card > p{margin-top: 10px;}
@@ -14,6 +14,7 @@
     .time{font-size: 13px;padding-right: 5px;}
     .btn-reply{color: #009688;}
     .leave-msg > li {border-bottom: 1px dotted #01AAED;padding: 15px 0 10px 0;}
+    .about-info-name{background-color: white;margin-top: 10px;border-radius: 10px;min-height: 294px;}
 </style>
 
 <script type="text/javascript" src="{$Think.const.APP_PUBLIC}xheditor/xheditor.js"></script>
@@ -23,16 +24,9 @@
         <a href="{:url('/')}" title="网站首页">首页<span class="layui-box">&gt;</span></a>
         <a href="{:url('About/index','module=3')}" title="关于">关于</a>
     </blockquote>
-    <div class="about-info">
-        <div class="tab">
-            <ul>
-                <li class="show-this" onclick="changeInfo(this,1)"><a>关于博主</a></li>
-                <li><a onclick="changeInfo(this,2)">关于网站</a></li>
-                <li><a onclick="changeInfo(this,3)">我有话说</a></li>
-            </ul>
-        </div>
-        <div class="" id="about-author">
-            <div class="name-card shadow">
+    <div>
+        <div class="about-info-name">
+            <div class="name-card">
                 <div class="name-card-logo">
                     <img src="{$Think.const.APP_PUBLIC}tmpImg/heiniuer.jpg" alt="黑牛儿"/>
                 </div>
@@ -46,17 +40,26 @@
                 </div>
             </div>
         </div >
-        <div class="layui-hide about_web" id="about-web">
-            <p>作为一个程序猿,我一直想拥有一个属于我自己的网站，用来记录学习或者工作中的点点滴滴。</p>
-            <p>很多次的开头，又很多次的无疾而终。每次都以“我不想写前段代码、不会设计、没有美感、做出来不好看......”为理由而半途而废。</p>
-            <p>久而久之我就发现除了工作之外，我就变得越来越懒惰，终于前段时间突然醒悟，告诉自己一定要做一个自己的网站出来，就算做的不好，这也是进步。</p>
-            <p>网站第一个版本（v.1.0.0）主要实现“程序猿”这个模块，用于记录自己在程序猿这条路上的点点滴滴。。。。。</p>
-        </div>
-        <div class="layui-hide" id="about-comment" style="margin: 10px">
-            <!-- UY BEGIN -->
-            <div id="uyan_frame"></div>
-            <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150821"></script>
-            <!-- UY END -->
+        <div class="about-info">
+            <div class="tab">
+                <ul>
+                    <!--<li class="show-this" onclick="changeInfo(this,1)"><a>关于博主</a></li>-->
+                    <li><a onclick="changeInfo(this,2)">关于网站</a></li>
+                    <li><a onclick="changeInfo(this,3)">我有话说</a></li>
+                </ul>
+            </div>
+            <div class="about_web" id="about-web">
+                <p>作为一个程序猿,我一直想拥有一个属于我自己的网站，用来记录学习或者工作中的点点滴滴。</p>
+                <p>很多次的开头，又很多次的无疾而终。每次都以“我不想写前段代码、不会设计、没有美感、做出来不好看......”为理由而半途而废。</p>
+                <p>久而久之我就发现除了工作之外，我就变得越来越懒惰，终于前段时间突然醒悟，告诉自己一定要做一个自己的网站出来，就算做的不好，这也是进步。</p>
+                <p>网站第一个版本（v.1.0.0）主要实现“程序猿”这个模块，用于记录自己在程序猿这条路上的点点滴滴。。。。。</p>
+            </div>
+            <div class="layui-hide" id="about-comment" style="margin: 10px">
+                <!-- UY BEGIN -->
+                <div id="uyan_frame"></div>
+                <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150821"></script>
+                <!-- UY END -->
+            </div>
         </div>
     </div>
 </div>

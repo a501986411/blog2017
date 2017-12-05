@@ -1,6 +1,6 @@
 <style>
-    .body-left{margin-top: 25px;float: left;}
-    .body-right{margin-top: 25px;margin-left: 20px;float: left;}
+    .body-left{margin-top: 25px;float: left;width: 66%;}
+    .body-right{margin-top: 25px;}
     .index-article{
         padding: 15px;
         margin-bottom: 10px;
@@ -40,11 +40,11 @@
 
 </style>
 <div id="">
-    <blockquote class="crumbs shadow">
+    <blockquote class="crumbs shadow" style="width: 100%;">
         <a href="{:url('/')}" title="网站首页">首页<span class="layui-box">&gt;</span></a>
         <a href="{:url('Article/index','module=2')}" title="程序猿">程序猿</a>
     </blockquote>
-    <div class="layui-col-md7 body-left">
+    <div class="layui-col-md8 body-left">
         <?php foreach($articleList as $item):?>
         <div class="index-article shadow">
             <div class="article-left">

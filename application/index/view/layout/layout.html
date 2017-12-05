@@ -9,7 +9,7 @@
 <link rel="stylesheet"  href="{$Think.const.APP_PUBLIC}css/font-awesome.min.css"/>
 <link rel="stylesheet"  href="{$Think.const.APP_PUBLIC}css/bass.css"/>
 <style>
-    .body-right{margin-top: 70px;margin-left: 20px;float: left;}
+    .body-right{margin-top: 70px;margin-left: 2%;float: left;width: 32%;}
     .body-right >  div{border-radius: 20px;}
     .body-right > .name-card {background-color: white;text-align: center;padding: 0 15px;margin-bottom: 15px;}
     .body-right > .name-card > .name-card-logo {display: inline-block;margin: 20px auto;}
@@ -33,6 +33,7 @@
         width: 93.5%;
     }
     .crumbs > a {margin-left: 5px;}
+    .layui-container {width: 80%;}
 </style>
 
 <script src="{$Think.const.APP_PUBLIC}jquery-1.9.1.min.js"></script>
@@ -43,7 +44,7 @@
 {include file="public/header" /}
 <div class="layui-container">
     {__CONTENT__}
-    <div class="layui-col-md4 body-right">
+    <div class="layui-col-md3 body-right">
         <div class="name-card shadow">
             <div class="name-card-logo">
                 <img src="{$Think.const.APP_PUBLIC}tmpImg/heiniuer.jpg" alt="黑牛儿"/>
@@ -77,7 +78,7 @@
             <div class="title">友情链接</div>
             <ul class="fa-ul">
                 <?php foreach($link as $value):?>
-                <li><i class="fa-li fa fa-hand-o-right"></i><a target="_blank" href="{$value['web_url']}">{$value['web_name']}</a></li>
+                <li><i class="fa-li fa fa-hand-o-right"></i><a target="_blank" onclick="goFriendLink({$value['id']},'{$value['web_url']}')" href="javascript:void(0);">{$value['web_name']}</a></li>
                 <?php endforeach;?>
             </ul>
         </div>
@@ -86,4 +87,13 @@
 </div>
 {include file="public/footer" /}
 </body>
+<script>
+    function goFriendLink(id,url)
+    {
+        window.open(url);
+        $.post('{:url("Right/linkJumpsTimes")}',{linkId:id},function(result){
+
+        });
+    }
+</script>
 </html>

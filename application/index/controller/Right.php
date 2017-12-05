@@ -31,7 +31,19 @@ class Right extends  Controller
     /**
      * 设置模块Id
      */
-    public function setModule(){
+    public function setModule()
+    {
         $this->assign('module', input('module') ? input('module') : 1);
+    }
+
+    /**
+     *友情链接点击时 点击数 + 1
+     */
+    public function linkJumpsTimes()
+    {
+        $linkId = input('linkId');
+        $friendLink = new FriendLink();
+        $friendLink->where('id',$linkId)->setInc('click_num');
+        return true;
     }
 }
