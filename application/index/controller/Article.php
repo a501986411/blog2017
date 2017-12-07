@@ -7,6 +7,7 @@
  */
 namespace app\index\controller;
 
+use app\admin\model\ArticleTag;
 use app\index\model\Article as Art;
 use think\Exception;
 
@@ -27,12 +28,29 @@ class Article  extends  Right{
         $article = new Art();
         $page = input('page') ? input('page') : 1;
         $rows = input('limit') ? input('limit') :10;
-        $result = $article->getArticleList($page,$rows); //获取文章首页文章列表
+        $searchKey = [];
+        if(input('tag')){
+            $searchKey['tag'] = trim(input('tag'));
+        }
+        $result = $article->getArticleList($page,$rows,$searchKey); //获取文章首页文章列表
         $returnData = ['articleList' => $result['rows'],
             'total' => $result['total'],
             'page' => $page,
+            'pages' => ceil($result['total']/$rows),
+            'tag' => $this->getTagsNav(),
         ];
-        return view('',$returnData);
+        return view('article',$returnData);
+    }
+
+    /**
+     * 获取标签
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getTagsNav()
+    {
+        $tag = new ArticleTag();
+        $data = $tag->where('status',1)->order('show_times','desc')->limit(6)->select();
+        return $data;
     }
 
     /**
@@ -45,7 +63,10 @@ class Article  extends  Right{
         $article = new Art();
         $article->isUpdate(true)->where('id',$articleId)->setInc('visit_num');
         $articleList = $article->where('id',$articleId)->find();
-        return view('',['article'=>$articleList]);
+        return view('detail',[
+            'article'=>$articleList,
+             'tag' => $this->getTagsNav(),
+            ]);
     }
 
 }

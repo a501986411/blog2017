@@ -1,0 +1,203 @@
+﻿<!--
+    
+ @Name：{$Think.const.APP_NAME}整站模板源码
+ @Author：Absolutely
+ @Site：http://www.lyblogs.cn
+
+ -->
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>{$Think.const.APP_NAME} - 文章专栏 - 基于layui的laypage扩展模块！</title>
+    <link rel="shortcut icon" href="{$Think.const.APP_PUBLIC}index/images/Logo_40.png" type="image/x-icon">
+    <!--Layui-->
+    <link href="{$Think.const.APP_PUBLIC}index/plug/layui/css/layui.css" rel="stylesheet" />
+    <!--font-awesome-->
+    <link href="{$Think.const.APP_PUBLIC}index/plug/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!--全局样式表-->
+    <link href="{$Think.const.APP_PUBLIC}index/css/global.css" rel="stylesheet" />
+    <!-- editor.md 样式-->
+    <link rel="stylesheet" href="{$Think.const.APP_PUBLIC}Editor.md/css/editormd.min.css" />
+    <!-- 本页样式表 -->
+    <link href="{$Think.const.APP_PUBLIC}index/css/detail.css" rel="stylesheet" />
+
+</head>
+<body>
+    <!-- 导航 -->
+    <nav class="blog-nav layui-header">
+        <div class="blog-container">
+            <!-- QQ互联登陆 -->
+            <!--<a href="javascript:;" class="blog-user">-->
+                <!--<i class="fa fa-qq"></i>-->
+            <!--</a>-->
+            <!--<a href="javascript:;" class="blog-user layui-hide">-->
+                <!--<img src="{$Think.const.APP_PUBLIC}index/images/Absolutely.jpg" alt="Absolutely" title="Absolutely" />-->
+            <!--</a>-->
+            <!-- {$Think.const.APP_NAME} -->
+            <a class="blog-logo" href="/">{$Think.const.APP_NAME}</a>
+            <!-- 导航菜单 -->
+            <ul class="layui-nav" lay-filter="nav">
+                <li class="layui-nav-item">
+                    <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+                </li>
+                <li class="layui-nav-item layui-this">
+                    <a href="{:url('Article/index')}"><i class="fa fa-file-text fa-fw"></i>&nbsp;程序猿</a>
+                </li>
+                <!--<li class="layui-nav-item">-->
+                <!--<a href="resource.html"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>-->
+                <!--</li>-->
+                <!--<li class="layui-nav-item">-->
+                <!--<a href="timeline.html"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>-->
+                <!--</li>-->
+                <li class="layui-nav-item">
+                    <a href="{:url('About/index')}"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+                </li>
+            </ul>
+            <!-- 手机和平板的导航开关 -->
+            <a class="blog-navicon" href="javascript:;">
+                <i class="fa fa-navicon"></i>
+            </a>
+        </div>
+    </nav>
+    <!-- 主体（一般只改变这里的内容） -->
+    <div class="blog-body">
+        <div class="blog-container">
+            <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+                <a href="/" title="网站首页">网站首页</a>
+                <a href="{:url('Article/index')}" title="程序猿">程序猿</a>
+                <a><cite>{$article['title']}</cite></a>
+            </blockquote>
+            <div class="blog-main">
+                <div class="blog-main-left">
+                    <!-- 文章内容（使用Kingeditor富文本编辑器发表的） -->
+                    <div class="article-detail shadow">
+                        <div class="article-detail-title">
+                            {$article['title']}
+                        </div>
+                        <div class="article-detail-info">
+                            <span>编辑时间：{$article['create_time']}</span>
+                            <span>作者：{$article['author']}</span>
+                            <span>浏览量：{$article['visit_num']}</span>
+                            <span>评论数：{$article['comment_num']}</span>
+                        </div>
+                        <div class="article-detail-content" id="article_show">
+                            <textarea style="display: none;">
+                                {$article['content']}
+                            </textarea>
+                        </div>
+                    </div>
+                    <!-- 评论区域 -->
+                    <div class="blog-module shadow" style="box-shadow: 0 1px 8px #a6a6a6;" >
+                        <!-- UY BEGIN -->
+                        <div id="uyan_frame"></div>
+                        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150821"></script>
+                        <!-- UY END -->
+                    </div>
+                </div>
+                <div class="blog-main-right">
+                    <!--右边悬浮 平板或手机设备显示-->
+                    <div class="category-toggle"><i class="fa fa-chevron-left"></i></div><!--这个div位置不能改，否则需要添加一个div来代替它或者修改样式表-->
+                    <div class="article-category shadow">
+                        <div class="article-category-title">标签导航</div>
+                        <?php foreach($tag as $value):?>
+                        <a href="<?php echo url('Article/index','tag='.$value['tag']);?>">{$value['tag']}</a>
+                        <?php endforeach;?>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="blog-module shadow">
+                        <div class="blog-module-title">热文推荐</div>
+                        <ul class="fa-ul blog-module-ul">
+                            <?php foreach($hotArticle as $value):?>
+                            <li><i class="fa-li fa fa-hand-o-right"></i><a href="<?php echo url('Article/show','articleId='.$value['id']);?>">{$value['title']}</a></li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                    <div class="blog-module shadow">
+                        <div class="blog-module-title">最新文章</div>
+                        <ul class="fa-ul blog-module-ul">
+                            <?php foreach($bestArticle as $value):?>
+                            <li><i class="fa-li fa fa-hand-o-right"></i><a href="<?php echo url('Article/show','articleId='.$value['id']);?>" target="_blank">{$value['title']}</a></li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                    <div class="blog-module shadow">
+                        <div class="blog-module-title">友情链接</div>
+                        <ul class="blogroll">
+                            <?php foreach($link as $value):?>
+                            <li><a href="javascript:void(0);" onclick="goFriendLink({$value['id']},'{$value['web_url']}')" title="{$value['web_name']}">{$value['web_name']}</a></li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <footer class="blog-footer">
+        <p><span>Copyright</span><span>&copy;</span><span>2017</span><a href="http://www.lyblogs.cn">{$Think.const.APP_NAME}</a><span>Design By LY</span></p>
+        <p><a href="http://www.miibeian.gov.cn/" target="_blank">蜀ICP备16029915号-1</a></p>
+    </footer>
+    <!--侧边导航-->
+    <ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
+        <li class="layui-nav-item">
+            <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="{:url('Article/index')}"><i class="fa fa-file-text fa-fw"></i>&nbsp;程序猿</a>
+        </li>
+        <li class="layui-nav-item layui-this">
+            <a href="{:url('About/index')}"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+        </li>
+    </ul>
+    <!--分享窗体-->
+    <div class="blog-share layui-hide">
+        <div class="blog-share-body">
+            <div style="width: 200px;height:100%;">
+                <div class="bdsharebuttonbox">
+                    <a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                    <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                    <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                    <a class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--遮罩-->
+    <div class="blog-mask animated layui-hide"></div>
+
+    <!-- jquery -->
+    <script src="{$Think.const.APP_PUBLIC}jquery-1.9.1.min.js"></script>
+
+    <!-- layui.js -->
+    <script src="{$Think.const.APP_PUBLIC}index/plug/layui/layui.js"></script>
+    <!-- 自定义全局脚本 -->
+    <script src="{$Think.const.APP_PUBLIC}index/js/global.js"></script>
+    <!-- 本页脚本 -->
+    <script src="{$Think.const.APP_PUBLIC}index/js/detail.js"></script>
+    <!-- editor.md-->
+    <script src="{$Think.const.APP_PUBLIC}Editor.md/lib/marked.min.js"></script>
+    <script src="{$Think.const.APP_PUBLIC}Editor.md/lib/prettify.min.js"></script>
+    <script src="{$Think.const.APP_PUBLIC}Editor.md/js/editormd.min.js"></script>
+
+    <script type="text/javascript">
+        var testEditor;
+        $(function () {
+            testEditor = editormd.markdownToHTML("article_show", {//注意：这里是上面DIV的id
+                htmlDecode: "style,script,iframe",
+                emoji: true,
+                taskList: true,
+                tex: true, // 默认不解析
+                flowChart: true, // 默认不解析
+                sequenceDiagram: true, // 默认不解析
+                codeFold: true,
+            });
+        });
+    </script>
+</body>
+</html>

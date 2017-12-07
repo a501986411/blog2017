@@ -19,11 +19,10 @@ class About extends Right
 
    public function index()
    {
-       $this->view->engine->layout('layout/about');
        $model = new LeaveMsg();
        $page = input('page') ? input('page') : 1;
        $leaveMsg = $model->getLeaveMsgList($page);
-       return view('',['leaveMsg'=>$leaveMsg['rows'],'total'=>$leaveMsg['total']]);
+       return view('about',['leaveMsg'=>$leaveMsg['rows'],'total'=>$leaveMsg['total']]);
    }
 
     /**

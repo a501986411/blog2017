@@ -8,7 +8,7 @@
 return [
     'template'               => [
         //开启使用模板布局
-        'layout_on'=>true,
+        'layout_on'=>false,
         'layout_name'=>'layout/layout'
     ],
     'page_rows'=>10,

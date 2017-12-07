@@ -19,17 +19,29 @@ class Article extends Model {
      * 获取文章列表
      * @param int $page
      * @param string $rows
+     * @param string $searchKey
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public function getArticleList($page=1,$rows='')
+    public function getArticleList($page=1,$rows='',$searchKey=array())
     {
         $rows = empty($rows) ? config('page_rows') : $rows;
-        $list['rows'] = $this->where('status',1)
-                    ->page($page,$rows)
+        //获取total
+        $this->where('status',1);
+        if(isset($searchKey['tag'])){
+            $this->where('tag','like','%'.$searchKey['tag'].'%');
+        }
+        $list['total'] = $this->count();
+
+        //获取数据
+        $this->where('status',1);
+        if(isset($searchKey['tag'])){
+            $this->where('tag','like','%'.$searchKey['tag'].'%');
+        }
+        $list['rows'] = $this->page($page,$rows)
                     ->order('is_top','desc')
                     ->order('create_time','desc')
                     ->select();
-        $list['total'] = $this->where('status',1)->count();
+
         return $list;
     }
     /**
