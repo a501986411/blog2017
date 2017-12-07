@@ -17,3 +17,52 @@ div{display: block;}
 }
 a:hover{color: blue;}
 a{cursor:pointer}
+
+/*∞Ÿ∂»∑÷œÌ*/
+.blog-share {
+    box-shadow: 0 0 8px #fff;
+    position: fixed;
+    right: 80px;
+    bottom: 15px;
+    background: #393D49;
+    z-index: 999;
+    margin-bottom: 1px;
+    height: 50px;
+}
+.blog-share .blog-share-body {
+    width: 100%;
+    height: 100%;
+}
+.bdsharebuttonbox {
+    height: 100%;
+}
+
+.bdsharebuttonbox .bds_qzone {
+    background: url('../tmpImg/qzone_32.png') no-repeat;
+}
+
+.bdsharebuttonbox .bds_tsina {
+    background: url('../tmpImg/weibo_32.png') no-repeat;
+}
+
+.bdsharebuttonbox .bds_weixin {
+    background: url('../tmpImg/wechat_32.png') no-repeat;
+}
+
+.bdsharebuttonbox .bds_sqq {
+    background: url('../tmpImg/qq_32.png') no-repeat;
+}
+
+.shareIn {
+    -moz-animation: shareIn 0.5s;
+    -o-animation: shareIn 0.5s;
+    -webkit-animation: shareIn 0.5s;
+    animation: shareIn 0.5s;
+}
+
+.shareOut {
+    -moz-animation: shareOut 0.5s;
+    -o-animation: shareOut 0.5s;
+    -webkit-animation: shareOut 0.5s;
+    animation: shareOut 0.5s;
+}
