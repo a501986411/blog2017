@@ -1,12 +1,12 @@
 /**
- * 加载layui模块
+ * 鍔犺浇layui妯″潡
  */
 var element;
 var laypage;
 layui.use(['element','laypage','util'], function(){
     element = layui.element;
     laypage = layui.laypage;
-    //分享工具
+    //鍒嗕韩宸ュ叿
     layui.util.fixbar({
         bar1: '&#xe641;',
         click: function (type) {
@@ -21,7 +21,7 @@ layui.use(['element','laypage','util'], function(){
         }
     });
 });
-//显示百度分享
+//鏄剧ず鐧惧害鍒嗕韩
 function shareIn() {
     $('.blog-share').unbind('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
     $('.blog-share').removeClass('shareOut');
@@ -29,7 +29,7 @@ function shareIn() {
     $('.blog-share').removeClass('layui-hide');
     $('.blog-share').addClass('layui-show');
 }
-//隐藏百度分享
+//闅愯棌鐧惧害鍒嗕韩
 function shareOut() {
     $('.blog-share').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
         $('.blog-share').addClass('layui-hide');
