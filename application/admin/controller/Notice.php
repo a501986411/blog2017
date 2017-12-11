@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * 公告管理
  * User: chl
  * Date: 2017/12/11
  * Time: 10:30
