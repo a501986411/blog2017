@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+use app\admin\model\Notice;
 use app\index\model\Article;
 
 
@@ -24,8 +25,19 @@ class Index extends Right
         $returnData = ['articleList' => $result['rows'],
             'total' => $result['total'],
             'page' => $page,
+            'notice'=>$this->getNoticeList(),
         ];
         return view('',$returnData);
+    }
+
+    /**
+     * 获取网站公告提示
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getNoticeList()
+    {
+        $model = new Notice();
+        return $model->order('id','desc')->limit(3)->select();
     }
 
 
