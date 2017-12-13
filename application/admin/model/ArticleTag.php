@@ -7,10 +7,21 @@
  */
 namespace app\admin\model;
 
+use think\Exception;
 use think\Model;
 use think\Log;
 
 class ArticleTag extends Model{
+
+    /**
+     * 状态获取器
+     */
+    public function getStatusTextAttr($value,$data)
+    {
+        $statusConf = [1=>'启用',2=>'屏蔽'];
+        return $statusConf[$data['status']];
+    }
+
     /**
      * 检查标签是否存在
      * @param $tag

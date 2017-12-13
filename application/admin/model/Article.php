@@ -7,6 +7,8 @@
  */
 namespace app\admin\model;
 
+use think\Exception;
+use think\Log;
 use think\Model;
 
 class Article extends Model {
@@ -92,6 +94,42 @@ class Article extends Model {
     {
         $tags = $this->where('id',$id)->value('tag');
         return empty($tags) ? [] : explode('|',$tags);
+    }
+
+    /**
+     * 修改文章标签
+     * @param array $tags 被替换标签
+     * @param array $newTag 替换标签
+     * @return bool
+     */
+    public function updateTag($tags=[],$newTag)
+    {
+        if(!is_string($newTag) || empty($newTag)){
+            Log::write(__FILE__.__LINE__."  传入参数错误:".json_encode($newTag,JSON_UNESCAPED_UNICODE),'ERROR');
+            return false;
+        }
+
+        if(!is_array($tags) || count($tags)<1){
+            Log::write(__FILE__.__LINE__."  传入参数正确:".json_encode($tags,JSON_UNESCAPED_UNICODE),'ERROR');
+            return false;
+        }
+        foreach($tags as $tag){
+            $data = $this->field(['id','tag','content'])->where('tag','like','%'.$tag."%")->select();
+            foreach($data as &$value){
+                $tagsArr = explode('|',$value['tag']);
+                $index = array_search($tag,$tagsArr);
+                if($index>=0){
+                    $tagsArr[$index] = $newTag;
+                    $value->tag = implode('|',$tagsArr);
+                    $ret = $value->isUpdate(true)->save();
+                    if($ret === false){
+                        Log::write(__FILE__.__LINE__.'更新文章标签错'.$this->getLastSql(),'ERROR');
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 }

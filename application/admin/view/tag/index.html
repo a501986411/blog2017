@@ -1,0 +1,120 @@
+<style>
+    .layui-table-checkbox{width: 15px;height: 15px;}
+</style>
+<div id="content">
+    <div>
+        <button class="layui-btn" id="add_menu" v-on:click="mergeTag()"><i class="layui-icon">&#xe608;</i>合并</button>
+        <table id="menu_tb" class="layui-table" lay-size="md">
+            <thead >
+            <tr>
+                <th style="width: 5%;">序号</th>
+                <th style="width: 5%;">选择</th>
+                <th style="width: 20%;">名称</th>
+                <th style="width: 20%;">状态</th>
+                <th style="width: 20%;">频率</th>
+                <th style="width: 20%;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item,index) in tagList">
+                <td>{{++index}}</td>
+                <td><input type="checkbox" v-bind:value="item.id" class="layui-table-checkbox"></td>
+                <td>{{item.tag}}</td>
+                <td>{{item.status_text}}</td>
+                <td>{{item.show_times}}</td>
+                <td>
+                    <button v-if="item.status == 1" class="layui-btn-sm layui-btn layui-btn-danger" @click="removeTag(item.id)">
+                        屏蔽
+                    </button>
+                    <button v-if="item.status == 2" class="layui-btn-sm layui-btn " @click="useTag(item.id)">
+                        启用
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    var content = new Vue({
+        el:"#content",
+        data:{
+            tagList:[],
+        },
+        created:function() {
+            this.getTagList();
+        },
+        methods:{
+            getTagList:function(){
+                var _self = this;
+                $.get('/Tag/getList',function(result){
+                    _self.tagList = result;
+                });
+            },
+            mergeTag: function () {
+                var _self = this;
+                var mergeIds = [];
+                $(".layui-table-checkbox:checked").each(function(){
+                    mergeIds.push($(this).val());
+                });
+                if(mergeIds.length<2){
+                    layer.msg('请至少选择两个标签');
+                    return false;
+                }
+                layer.open({
+                    type: 1
+                    ,title: false //不显示标题栏
+                    ,closeBtn: false
+                    ,area: '200px;'
+                    ,shade: 0.8
+                    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,btn: ['合并', '放弃']
+                    ,btnAlign: 'c'
+                    ,moveType: 1 //拖拽模式，0或者1
+                    ,content: '<p style="text-align: center;color: red;line-height: 27px;margin: 5px 5px 0 5px;">合并规则：将频率小的合并到频率高的标签上，不可恢复，请谨慎操作！</p>'
+                    ,yes:function(){
+                        layer.closeAll();
+                        $.post("/Tag/mergeTags",{tags:mergeIds.join(',')},function(result){
+                            if(result){
+                                layer.msg('合并成功');
+                                _self.getTagList();
+                            }else{
+                                layer.msg('合并失败');
+                            }
+                        });
+                    }
+                });
+
+
+
+            },
+            removeTag:function(tagId){
+                var _self = this;
+                $.get("/Tag/removeTag?tagId="+tagId,function(result){
+                    if(result){
+                        layer.msg('操作成功');
+                        _self.getTagList();
+                    }else{
+                        layer.msg('操作失败');
+                    }
+
+                });
+            },
+            useTag:function(tagId){
+                var _self = this;
+                $.get("/Tag/useTag?tagId="+tagId,function(result){
+                    if(result){
+                        layer.msg('操作成功');
+                        _self.getTagList();
+                    }else{
+                        layer.msg('操作失败');
+                    }
+
+                });
+            },
+            cancel:function(){
+                this.getTagList();
+            }
+        }
+    });
+</script>
