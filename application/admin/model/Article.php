@@ -16,6 +16,8 @@ class Article extends Model {
     protected $insert = ['index_img'];
     protected $update = ['index_img'];
     public $statusStr = [1=>'正常',0=>'屏蔽'];
+//    protected $resultSetType = 'collection';
+
     public static function init()
     {
         Article::event('before_insert',function($article){
@@ -114,16 +116,23 @@ class Article extends Model {
             return false;
         }
         foreach($tags as $tag){
-            $data = $this->field(['id','tag','content'])->where('tag','like','%'.$tag."%")->select();
+            if(empty($tag)){
+                continue;
+            }
+            $data = $this->field(['id','tag'])->where('tag','like','%'.$tag."%")->select();
             foreach($data as &$value){
-                $tagsArr = explode('|',$value['tag']);
+                $tagsArr = array_flip(array_flip(explode('|',$value['tag'])));
                 $index = array_search($tag,$tagsArr);
                 if($index>=0){
-                    $tagsArr[$index] = $newTag;
-                    $value->tag = implode('|',$tagsArr);
-                    $ret = $value->isUpdate(true)->save();
-                    if($ret === false){
-                        Log::write(__FILE__.__LINE__.'更新文章标签错'.$this->getLastSql(),'ERROR');
+                    if(in_array($newTag,$tagsArr)){ //新标签已存在该文章里
+                        unset($tagsArr[$index]);
+                    }else {
+                        $tagsArr[$index] = $newTag;
+                    }
+                    $tagsArr = implode('|', $tagsArr);
+                    $ret = $this->where('id', $value['id'])->update(['tag' => $tagsArr]);
+                    if ($ret === false) {
+                        Log::write(__FILE__ . __LINE__ . '更新文章标签出错' . $this->getLastSql(), 'ERROR');
                         return false;
                     }
                 }

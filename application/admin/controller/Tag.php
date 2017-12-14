@@ -13,6 +13,7 @@ use app\admin\model\Article;
 use app\admin\model\ArticleTag;
 use think\Exception;
 use think\Log;
+use think\Db;
 
 class Tag extends Auth
 {
@@ -90,36 +91,31 @@ class Tag extends Auth
         $model = new ArticleTag();
         $articleModel = new Article();
         $result = $model->where('id','in',explode(',',$tags))->select();
-
         $totalShowTimes = 0; //合计频率
         $lastTagTd = 0; //保留标签的id
         $maxShowTimes = 0;//最大频率
         $lastTag = '';//保留的标签
-        $deleteId = 0;//需要删除的Id
-
+        $deleteTag = [];
         try{
-            $model->startTrans();
+            Db::startTrans();
             foreach($result as $key=>$value){
-                $model = new ArticleTag();
-                $articleModel = new Article();
                 if($maxShowTimes <= $value['show_times']){
                     $deleteId = $lastTagTd;//更待徐删除的标签id
+                    $deleteTag[] = $lastTag;
                     //更改保留标签
                     $lastTagTd = $value['id'];
                     $maxShowTimes = $value['show_times'];
                     $lastTag = $value['tag'];
                 }else {
                     $deleteId = $value['id'];
+                    $deleteTag[] = $value['tag'];
                 }
 
-                //删除tag 同时更新 文章标签
+                //删除tag 记录
                 if($deleteId){
-                    //更新文章
-                    if(!$articleModel->updateTag([$value['tag']],$lastTag)){
-                        throw new Exception('更新文章标签出错');
-                    }
                     //删除标签
-                    $ret = $model->delete($deleteId);
+                    $ret = $model->where(['id'=>$deleteId])->delete();
+
                     if($ret === false){
                         Log::write(__FILE__.__LINE__.'标签删除错误:'.$model->getError());
                         throw new Exception('删除标签出错');
@@ -128,15 +124,20 @@ class Tag extends Auth
                 $totalShowTimes += $value['show_times'];
             }
 
+            //更新文章标签
+            if(!$articleModel->updateTag($deleteTag,$lastTag)){
+                throw new Exception('更新文章标签出错');
+            }
+
             //更新保留标签频率
-            $ret = $model->save(['show_times'=>$totalShowTimes],['id'=>$lastTagTd]);
+            $ret = $model->where(['id'=>$lastTagTd])->update(['show_times'=>$totalShowTimes]);
             if($ret === false){
                 throw new Exception('更新保留标签出错');
             }
-            $model->commit();
+            Db::commit();
             return true;
         }catch (Exception $e){
-            $model->rollback();
+            Db::rollback();
             Log::write(__FILE__.__LINE__.$e->getMessage(),'ERROR');
             return false;
         }
