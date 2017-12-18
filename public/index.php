@@ -13,7 +13,7 @@
 
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/../application/');
-define('APP_PUBLIC', './static/');
+define('APP_PUBLIC', '/static/');
 define('APP_UPLOADS', '/uploads/');
 define('APP_NAME','黑牛儿');
 define('EDITOR_LIB','/static/Editor.md/lib/');

@@ -128,7 +128,7 @@ CREATE TABLE `blog_friend_link` (
 -- ----------------------------
 -- Records of blog_friend_link
 -- ----------------------------
-INSERT INTO `blog_friend_link` VALUES ('1', ' 不落阁', 'http://www.lyblogs.cn/', '0', '2');
+INSERT INTO `blog_friend_link` VALUES ('1', ' 黑牛儿', 'http://www.lyblogs.cn/', '0', '2');
 INSERT INTO `blog_friend_link` VALUES ('3', 'zuoqy', 'http://zuoqy.cn/', '0', '1');
 INSERT INTO `blog_friend_link` VALUES ('4', 'WYW 一个人的博客', 'http://www.wuyuanwei.com/', '0', '0');
 INSERT INTO `blog_friend_link` VALUES ('5', '晴枫', 'https://www.sunmale.cn/', '0', '0');

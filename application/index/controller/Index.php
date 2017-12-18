@@ -18,6 +18,9 @@ class Index extends Right
      */
     public function index()
     {
+        if(!config('app_debug')){
+            $this->redirect('showBuild');
+        }
         $article = new Article();
         $page = input('page') ? input('page') : 1;
         $rows = input('limit') ? input('limit') :7;
