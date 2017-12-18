@@ -19,7 +19,7 @@ class Index extends Right
     public function index()
     {
         if(!config('app_debug')){
-            $this->redirect('showBuild');   
+            $this->redirect('showBuild');
         }
         $article = new Article();
         $page = input('page') ? input('page') : 1;
@@ -45,7 +45,7 @@ class Index extends Right
 
     public function showBuild()
     {
-        return view();
+        return view('showbuild');
     }
 
 }
