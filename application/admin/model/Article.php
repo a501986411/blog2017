@@ -14,9 +14,8 @@ use think\Model;
 class Article extends Model {
     protected $autoWriteTimestamp = true;
     protected $insert = ['index_img'];
-    protected $update = ['index_img'];
     public $statusStr = [1=>'正常',0=>'屏蔽'];
-//    protected $resultSetType = 'collection';
+
 
     public static function init()
     {
@@ -29,23 +28,7 @@ class Article extends Model {
     }
 
 
-    /**
-     * 设置文章列表显示图片
-     * @return string
-     */
-    protected function setIndexImgAttr()
-    {
-        $content = $this->content;
-        $token = strtok($content, "(");
-        while ($token !== false) {
-            if(strpos($token,"/uploads/")===0)
-            {
-                return  mb_substr($token,0,strpos($token,')'));
-            }
-            $token = strtok("(");
-        }
-        return "/static/tmpImg/201708252044567037.jpg";
-    }
+
 
     /**
      * 保存文章标签
