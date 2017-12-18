@@ -32,12 +32,16 @@ class Article  extends  Right{
         if(input('tag')){
             $searchKey['tag'] = trim(input('tag'));
         }
+        if(input('?get.keywords')){
+            $searchKey['keywords'] = trim(input('keywords'));
+        }
         $result = $article->getArticleList($page,$rows,$searchKey); //获取文章首页文章列表
         $returnData = ['articleList' => $result['rows'],
             'total' => $result['total'],
             'page' => $page,
             'pages' => ceil($result['total']/$rows),
             'tag' => $this->getTagsNav(),
+            'keywords' => isset($searchKey['keywords']) ? $searchKey['keywords'] : ''
         ];
         return view('article',$returnData);
     }

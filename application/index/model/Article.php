@@ -30,6 +30,12 @@ class Article extends Model {
         if(isset($searchKey['tag'])){
             $this->where('tag','like','%'.$searchKey['tag'].'%');
         }
+        if(isset($searchKey['keywords'])){
+            $this->where('tag','like','%'.$searchKey['keywords'].'%')
+                 ->whereOr('content','like','%'.$searchKey['keywords'].'%')
+                 ->whereOr('title','like','%'.$searchKey['keywords'].'%')
+                 ->whereOr('description','like','%'.$searchKey['keywords'].'%');
+        }
         $list['total'] = $this->count();
 
         //获取数据
@@ -37,6 +43,14 @@ class Article extends Model {
         if(isset($searchKey['tag'])){
             $this->where('tag','like','%'.$searchKey['tag'].'%');
         }
+
+        if(isset($searchKey['keywords'])){
+            $this->where('tag','like','%'.$searchKey['keywords'].'%')
+                ->whereOr('content','like','%'.$searchKey['keywords'].'%')
+                ->whereOr('title','like','%'.$searchKey['keywords'].'%')
+                ->whereOr('description','like','%'.$searchKey['keywords'].'%');
+        }
+
         $list['rows'] = $this->page($page,$rows)
                     ->order('is_top','desc')
                     ->order('create_time','desc')

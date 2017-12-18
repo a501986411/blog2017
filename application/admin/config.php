@@ -1,31 +1,31 @@
 <?php
 /**
- * admin（后台）模块单独配置文件
+ * admin锛堝悗鍙帮級妯″潡鍗曠嫭閰嶇疆鏂囦欢
  * User: chl
  * Date: 2017/11/20
  * Time: 15:00
  */
 return [
     'template'               => [
-        //开启使用模板布局
+        //寮�鍚娇鐢ㄦā鏉垮竷灞�
         'layout_on'=>true,
         'layout_name'=>'layout/layout'
     ],
     'cookie_user' => 'user',
     'cookie'                 => [
-        // cookie 名称前缀
+        // cookie 鍚嶇О鍓嶇紑
         'prefix'    => 'admin_',
-        // cookie 保存时间
+        // cookie 淇濆瓨鏃堕棿
         'expire'    => bcmul(3600,0.5),
-        // cookie 保存路径
+        // cookie 淇濆瓨璺緞
         'path'      => '/',
-        // cookie 有效域名
+        // cookie 鏈夋晥鍩熷悕
         'domain'    => '',
-        //  cookie 启用安全传输
+        //  cookie 鍚敤瀹夊叏浼犺緭
         'secure'    => false,
-        // httponly设置
+        // httponly璁剧疆
         'httponly'  => '',
-        // 是否使用 setcookie
+        // 鏄惁浣跨敤 setcookie
         'setcookie' => true,
     ],
 ];
