@@ -40,6 +40,9 @@ class Index extends Right
         return $model->order('id','desc')->limit(3)->select();
     }
 
-
+    public function showBuild()
+    {
+        return view();
+    }
 
 }
