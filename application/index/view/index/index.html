@@ -87,7 +87,11 @@
                     <?php foreach($articleList as $item):?>
                     <div class="article shadow">
                         <div class="article-left">
+                            <?php if(!empty($item['index_img'])):?>
                             <img src="{$item['index_img']}" alt="{$item['title']}" />
+                            <?php else:?>
+                            <img src="{:config('article_img')}" alt="{$item['title']}" />
+                            <?php endif;?>
                         </div>
                         <div class="article-right">
 

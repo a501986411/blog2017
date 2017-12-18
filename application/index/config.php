@@ -13,9 +13,5 @@ return [
     ],
     'page_rows'=>10,
 
-    'menu' => [
-        '1'=>'home',
-        '2'=>'article',
-        '3'=>'about'
-    ],
+    'article_img'=>APP_PUBLIC.'common/images/default_article.jpg',
 ];
