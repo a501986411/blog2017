@@ -16,7 +16,7 @@ class LeaveMsg extends Model
     protected $createTime='create_time';
 
     /**
-     * 获取留言列表
+     * 鑾峰彇鐣欒█鍒楄〃
      * @param int $page
      * @param string $rows
      * @return false|\PDOStatement|string|\think\Collection
