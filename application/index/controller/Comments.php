@@ -8,6 +8,7 @@
 namespace app\index\controller;
 
 use app\index\model\ArticleComments;
+use app\index\model\LeaveMsg;
 use think\Controller;
 use think\Log;
 
@@ -38,8 +39,23 @@ class Comments extends Controller {
             $articleData['cmtid'] = $comment['cmtid'];
             $model = new ArticleComments();
             $model->save($articleData);
+            Log::info('保存评论:'.$model->getLastSql());
         }else{//其他留言
-
+            $leaveMsg['pid'] = $comment['replyid'];
+            $leaveMsg['content'] =$comment['content'];
+            $leaveMsg['userId'] = $comment['user']['sohuPlusId'];
+            $leaveMsg['nickname'] = $comment['user']['nickname'];
+            $leaveMsg['usericon'] = $comment['user']['usericon'];
+            $leaveMsg['ip'] = $comment['ip'];
+            $leaveMsg['channeltype'] = $comment['channeltype'];
+            $leaveMsg['from'] =  $comment['from'];
+            $leaveMsg['spcount'] = $comment['spcount'];
+            $leaveMsg['opcount'] = $comment['opcount'];
+            $leaveMsg['ctime'] = $comment['ctime'];
+            $leaveMsg['cmtid'] = $comment['cmtid'];
+            $model = new LeaveMsg();
+            $model->save($leaveMsg);
+            Log::info('保存留言:'.$model->getLastSql());
         }
 
     }
