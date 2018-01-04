@@ -27,7 +27,23 @@ class Article extends Model {
         });
     }
 
-
+    /**
+     * 设置首页图片
+     * @return string
+     */
+    protected function setIndexImgAttr()
+    {
+        $content = $this->content;
+        $token = strtok($content, "(");
+        while ($token !== false) {
+            if(strpos($token,"/uploads/")===0)
+            {
+                return  mb_substr($token,0,strpos($token,')'));
+            }
+            $token = strtok("(");
+        }
+        return "";
+    }
 
 
     /**

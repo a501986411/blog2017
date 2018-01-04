@@ -32,9 +32,22 @@ class ArticleManage extends Auth
         $model = new Article();
         try {
             $model->startTrans();
-            $ret = $model->allowField(true)->isUpdate(input('post.id'))->save(input());
-            if ($ret == false) {
-                throw  new Exception('');
+            $model->id = input('post.id');
+            $model->title = input('post.title');
+            $model->description = input('post.description');
+            $model->tag = input('post.tag');
+            $model->author = input('post.author');
+            $model->content = input('post.content');
+            if(!$model->id){
+                $ret = $model->save();
+                if ($ret == false) {
+                    throw  new Exception('');
+                }
+            }else{
+                $ret = $model->isUpdate(true)->save();
+                if ($ret == false) {
+                    throw  new Exception('');
+                }
             }
             $model->commit();
             return true;
