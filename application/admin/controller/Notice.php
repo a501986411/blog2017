@@ -29,6 +29,7 @@ class Notice extends Auth
         $model = new noticeModel();
         $model->content = input('post.content');
         $model->url = input('post.url');
+        $model->create_time = time();
         if(empty(input('post.id'))){
             $ret = $model->save();
             if($ret === false){
@@ -56,7 +57,7 @@ class Notice extends Auth
     }
 
     /**
-     *
+     * 删除公告
      */
     public function removeNotice()
     {
