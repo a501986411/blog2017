@@ -141,6 +141,16 @@ layui.use(['element', 'layer', 'util', 'form'], function () {
 });
 
 
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?542ba6ef60777adee8cf8f43331c101c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+
+
+
 //百度分享插件
 window._bd_share_config = {
     "common": {
